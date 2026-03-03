@@ -269,40 +269,6 @@ class _FunctionPageState extends State<FunctionPage> {
                 );
               },
             ),
-            SizedBox(height: 16),
-            _buildActivityCard(
-              id: "hut_test",
-              title: "通知测试",
-              rating: null,
-              iconData: Ionicons.phone_portrait,
-              color: Colors.orange.shade100,
-              hasArrow: true,
-              onTap: () async {
-                final now = DateTime.now();
-                // 假设 10 分钟后上课
-                final classStart = now.add(const Duration(minutes: 1));
-                // 假设 55 分钟后下课 (一节课45分钟)
-                final classEnd = classStart.add(const Duration(minutes: 45));
-                await LiveNotificationManager.showClassLiveUpdate(
-                  className: "高等数学",
-                  location: "公共教学楼 A204",
-                  startTime: classStart,
-                  endTime: classEnd,
-                );
-              },
-            ),
-            SizedBox(height: 16),
-            _buildActivityCard(
-              id: "hut_clo",
-              title: "关闭通知测试",
-              rating: null,
-              iconData: Ionicons.phone_portrait,
-              color: Colors.orange.shade100,
-              hasArrow: true,
-              onTap: () async {
-                await LiveNotificationManager.stopClassLiveUpdate();
-              },
-            ),
             SizedBox(height: 100),
           ],
         ),
