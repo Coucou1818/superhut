@@ -8,6 +8,7 @@ import 'package:superhut/pages/drink/view/view.dart';
 import 'package:superhut/pages/freeroom/building.dart';
 import 'package:superhut/pages/hutpages/hutmain.dart';
 import 'package:superhut/pages/water/view.dart';
+import 'package:superhut/live_notification_manager.dart';
 
 import '../../pages/score/scorepage.dart';
 import '../../utils/token.dart';
@@ -261,13 +262,47 @@ class _FunctionPageState extends State<FunctionPage> {
               color: Colors.orange.shade100,
               hasArrow: true,
               onTap: () async {
+                await renewToken(context);
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => HutMainPage()),
                 );
               },
             ),
-
+            SizedBox(height: 16),
+            _buildActivityCard(
+              id: "hut_test",
+              title: "通知测试",
+              rating: null,
+              iconData: Ionicons.phone_portrait,
+              color: Colors.orange.shade100,
+              hasArrow: true,
+              onTap: () async {
+                final now = DateTime.now();
+                // 假设 10 分钟后上课
+                final classStart = now.add(const Duration(minutes: 1));
+                // 假设 55 分钟后下课 (一节课45分钟)
+                final classEnd = classStart.add(const Duration(minutes: 45));
+                await LiveNotificationManager.showClassLiveUpdate(
+                  className: "高等数学",
+                  location: "公共教学楼 A204",
+                  startTime: classStart,
+                  endTime: classEnd,
+                );
+              },
+            ),
+            SizedBox(height: 16),
+            _buildActivityCard(
+              id: "hut_clo",
+              title: "关闭通知测试",
+              rating: null,
+              iconData: Ionicons.phone_portrait,
+              color: Colors.orange.shade100,
+              hasArrow: true,
+              onTap: () async {
+                await LiveNotificationManager.stopClassLiveUpdate();
+              },
+            ),
             SizedBox(height: 100),
           ],
         ),
@@ -286,7 +321,7 @@ class _FunctionPageState extends State<FunctionPage> {
     required VoidCallback onTap,
   }) {
     final isLoading = _isLoading(id);
-    
+
     return GestureDetector(
       onTap: isLoading ? null : onTap, // 如果正在加载则禁用点击
       child: Container(
@@ -359,12 +394,13 @@ class _FunctionPageState extends State<FunctionPage> {
                     Container(
                       decoration: BoxDecoration(shape: BoxShape.circle),
                       padding: EdgeInsets.all(8),
-                      child: isLoading 
-                        ? LoadingAnimationWidget.inkDrop(
-                            color: Theme.of(context).colorScheme.primary,
-                            size: 16,
-                          )
-                        : Icon(Ionicons.arrow_forward, size: 16),
+                      child:
+                          isLoading
+                              ? LoadingAnimationWidget.inkDrop(
+                                color: Theme.of(context).colorScheme.primary,
+                                size: 16,
+                              )
+                              : Icon(Ionicons.arrow_forward, size: 16),
                     )
                   else
                     _buildAvatarGroup(),

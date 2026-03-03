@@ -10,6 +10,7 @@ import '../../utils/course/coursemain.dart';
 import '../../widget_refresh_service.dart';
 import 'logic.dart';
 import '../../utils/course/getCourse.dart';
+import '../../live_notification_manager.dart';
 
 class CourseTableView extends StatefulWidget {
   const CourseTableView({super.key});
@@ -562,6 +563,7 @@ class _CourseTableViewState extends State<CourseTableView> {
       firstload = false;
       getWeek();
       _courseData = await loadClassFromLocal();
+      LiveNotificationManager.syncSchedule(_courseData);
     } else {
       firstload = false;
       //getWeek();
