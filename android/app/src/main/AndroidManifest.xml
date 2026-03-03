@@ -2,6 +2,13 @@
     <!-- 添加权限 -->
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+    
+    <!-- 实时更新与通知权限 -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.POST_PROMOTED_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+    <uses-permission android:name="android.permission.USE_EXACT_ALARM" />
+
     <application
             android:label="超级包菜"
             android:name="${applicationName}"
@@ -35,6 +42,18 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+
+        <!-- 课程状态实时更新后台闹钟 -->
+        <receiver android:name=".ClassAlarmReceiver" android:exported="true">
+            <intent-filter>
+                <!-- Allow the system to wake up this receiver via implicit action -->
+                <action android:name="com.zhiquxy.rice.ACTION_CLASS_ALARM" />
+                <!-- Immediately trigger sync for current/upcoming class state -->
+                <action android:name="com.zhiquxy.rice.ACTION_SYNC_IMMEDIATE" />
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED"/>
+            </intent-filter>
+        </receiver>
 
         <!-- 课程表桌面小组件注册 -->
         <receiver
