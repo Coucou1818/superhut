@@ -8,6 +8,7 @@ import 'package:superhut/pages/drink/view/view.dart';
 import 'package:superhut/pages/freeroom/building.dart';
 import 'package:superhut/pages/hutpages/hutmain.dart';
 import 'package:superhut/pages/water/view.dart';
+import 'package:superhut/live_notification_manager.dart';
 
 import '../../pages/score/scorepage.dart';
 import '../../utils/token.dart';
@@ -261,13 +262,13 @@ class _FunctionPageState extends State<FunctionPage> {
               color: Colors.orange.shade100,
               hasArrow: true,
               onTap: () async {
+                await renewToken(context);
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => HutMainPage()),
                 );
               },
             ),
-
             SizedBox(height: 100),
           ],
         ),
@@ -286,7 +287,7 @@ class _FunctionPageState extends State<FunctionPage> {
     required VoidCallback onTap,
   }) {
     final isLoading = _isLoading(id);
-    
+
     return GestureDetector(
       onTap: isLoading ? null : onTap, // 如果正在加载则禁用点击
       child: Container(
@@ -359,12 +360,13 @@ class _FunctionPageState extends State<FunctionPage> {
                     Container(
                       decoration: BoxDecoration(shape: BoxShape.circle),
                       padding: EdgeInsets.all(8),
-                      child: isLoading 
-                        ? LoadingAnimationWidget.inkDrop(
-                            color: Theme.of(context).colorScheme.primary,
-                            size: 16,
-                          )
-                        : Icon(Ionicons.arrow_forward, size: 16),
+                      child:
+                          isLoading
+                              ? LoadingAnimationWidget.inkDrop(
+                                color: Theme.of(context).colorScheme.primary,
+                                size: 16,
+                              )
+                              : Icon(Ionicons.arrow_forward, size: 16),
                     )
                   else
                     _buildAvatarGroup(),
