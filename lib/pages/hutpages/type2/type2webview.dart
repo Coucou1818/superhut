@@ -50,7 +50,7 @@ class _Type2WebviewState extends State<Type2Webview> {
     "sec-fetch-user": "?1",
     "sec-fetch-dest": "document",
     "accept-language": "zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7",
-    "cookie": "userToken=; Domain=xzhngydx.hut.edu.cn; Path=/",
+    "Cookie": "userToken=; Domain=xzhngydx.hut.edu.cn; Path=/",
     "priority": "u=0, i",
   };
   String resultUrl = '';
@@ -91,6 +91,7 @@ class _Type2WebviewState extends State<Type2Webview> {
         resultUrl = newUri.toString();
       }
     }
+    headerMap["Cookie"] = _buildCookieHeader();
     print(headerMap);
     return true;
   }
@@ -100,7 +101,64 @@ class _Type2WebviewState extends State<Type2Webview> {
     resultUrl = widget.serviceUrl;
     print(resultUrl);
     doWithAccept();
+    await _injectWebViewCookies();
     return true;
+  }
+
+  List<String> _getCookieTokenKeys() {
+    final tokenAcceptList = getTokenAccept(widget.tokenAccept);
+    final cookieKeys =
+        tokenAcceptList
+            .where((item) => item['tokenType'] == 'cookie')
+            .map((item) => item['tokenKey']?.toString() ?? '')
+            .where((key) => key.isNotEmpty)
+            .toSet()
+            .toList();
+
+    return cookieKeys.isEmpty ? ['userToken'] : cookieKeys;
+  }
+
+  String _buildCookieHeader() {
+    final domain = _getCookieDomain();
+    return _getCookieTokenKeys()
+        .map((key) => '$key=$token; Domain=$domain; Path=/')
+        .join('; ');
+  }
+
+  String _getCookieDomain() {
+    try {
+      final uri = Uri.parse(resultUrl);
+      if (uri.host.isNotEmpty) {
+        return uri.host;
+      }
+    } catch (_) {}
+
+    return 'xzhngydx.hut.edu.cn';
+  }
+
+  Future<void> _injectWebViewCookies() async {
+    if (resultUrl.isEmpty || token.isEmpty) return;
+
+    try {
+      final uri = Uri.parse(resultUrl);
+      if (!uri.hasScheme || uri.host.isEmpty) return;
+
+      final cookieManager = CookieManager.instance();
+      final webUri = WebUri(uri.origin);
+
+      for (final cookieName in _getCookieTokenKeys()) {
+        await cookieManager.setCookie(
+          url: webUri,
+          name: cookieName,
+          value: token,
+          domain: uri.host,
+          path: '/',
+          isSecure: uri.scheme == 'https',
+        );
+      }
+    } catch (_) {
+      // Cookie header injection remains as a fallback for platforms that allow it.
+    }
   }
 
   @override
@@ -436,10 +494,12 @@ class _Type2WebviewState extends State<Type2Webview> {
                       },
                     );
                   },
-                  whenNotDone:  Center(child: LoadingAnimationWidget.inkDrop(
-                    color: Theme.of(context).primaryColor,
-                    size: 40,
-                  ),),
+                  whenNotDone: Center(
+                    child: LoadingAnimationWidget.inkDrop(
+                      color: Theme.of(context).primaryColor,
+                      size: 40,
+                    ),
+                  ),
                 ),
               ),
 
@@ -478,7 +538,7 @@ class _Type2WebviewState extends State<Type2Webview> {
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                           LoadingAnimationWidget.inkDrop(
+                          LoadingAnimationWidget.inkDrop(
                             color: Theme.of(context).primaryColor,
                             size: 40,
                           ),
