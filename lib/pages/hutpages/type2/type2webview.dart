@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:enhanced_future_builder/enhanced_future_builder.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:ionicons/ionicons.dart';
@@ -24,6 +25,8 @@ class Type2Webview extends StatefulWidget {
 }
 
 class _Type2WebviewState extends State<Type2Webview> {
+  static const String _webViewCookieDomain = 'xzhngydx.hut.edu.cn';
+
   final api = HutUserApi();
   InAppWebViewController? _webViewController;
   bool _canGoBack = false;
@@ -50,7 +53,6 @@ class _Type2WebviewState extends State<Type2Webview> {
     "sec-fetch-user": "?1",
     "sec-fetch-dest": "document",
     "accept-language": "zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7",
-    "Cookie": "userToken=; Domain=xzhngydx.hut.edu.cn; Path=/",
     "priority": "u=0, i",
   };
   String resultUrl = '';
@@ -91,7 +93,11 @@ class _Type2WebviewState extends State<Type2Webview> {
         resultUrl = newUri.toString();
       }
     }
-    headerMap["Cookie"] = _buildCookieHeader();
+    if (defaultTargetPlatform == TargetPlatform.android) {
+      headerMap["Cookie"] = _buildCookieHeaderWithAttributes();
+    } else {
+      headerMap.remove("Cookie");
+    }
     print(headerMap);
     return true;
   }
@@ -118,22 +124,10 @@ class _Type2WebviewState extends State<Type2Webview> {
     return cookieKeys.isEmpty ? ['userToken'] : cookieKeys;
   }
 
-  String _buildCookieHeader() {
-    final domain = _getCookieDomain();
+  String _buildCookieHeaderWithAttributes() {
     return _getCookieTokenKeys()
-        .map((key) => '$key=$token; Domain=$domain; Path=/')
+        .map((key) => '$key=$token; Domain=$_webViewCookieDomain; Path=/')
         .join('; ');
-  }
-
-  String _getCookieDomain() {
-    try {
-      final uri = Uri.parse(resultUrl);
-      if (uri.host.isNotEmpty) {
-        return uri.host;
-      }
-    } catch (_) {}
-
-    return 'xzhngydx.hut.edu.cn';
   }
 
   Future<void> _injectWebViewCookies() async {
@@ -144,20 +138,35 @@ class _Type2WebviewState extends State<Type2Webview> {
       if (!uri.hasScheme || uri.host.isEmpty) return;
 
       final cookieManager = CookieManager.instance();
-      final webUri = WebUri(uri.origin);
+      final webUri = WebUri('${uri.scheme}://$_webViewCookieDomain');
 
       for (final cookieName in _getCookieTokenKeys()) {
         await cookieManager.setCookie(
           url: webUri,
           name: cookieName,
           value: token,
-          domain: uri.host,
+          domain: _webViewCookieDomain,
           path: '/',
           isSecure: uri.scheme == 'https',
+          sameSite: HTTPCookieSameSitePolicy.LAX,
         );
       }
-    } catch (_) {
-      // Cookie header injection remains as a fallback for platforms that allow it.
+
+      if (kDebugMode) {
+        final cookies = await cookieManager.getCookies(url: webUri);
+        final cookieDebugInfo = cookies
+            .where((cookie) => _getCookieTokenKeys().contains(cookie.name))
+            .map(
+              (cookie) =>
+                  '${cookie.name}; domain=${cookie.domain}; path=${cookie.path}',
+            )
+            .join(', ');
+        print('Type2 WebView cookies injected for $webUri: $cookieDebugInfo');
+      }
+    } catch (e) {
+      if (kDebugMode) {
+        print('Type2 WebView cookie injection failed: $e');
+      }
     }
   }
 
