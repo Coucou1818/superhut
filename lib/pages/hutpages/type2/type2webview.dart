@@ -522,7 +522,7 @@ class _Type2WebviewState extends State<Type2Webview> {
                   ),
                   child: IconButton(
                     icon: const Icon(
-                      Ionicons.arrow_back_circle_outline,
+                      Icons.arrow_circle_left_outlined,
                       color: Colors.white,
                       size: 28,
                     ),
@@ -599,4 +599,5 @@ class _Type2WebviewState extends State<Type2Webview> {
     );
   }
 }
+
 

@@ -453,7 +453,7 @@ class _FunctionDrinkPageState extends State<FunctionDrinkPage> {
                   ),
                   ListTile(
                     leading: Icon(
-                      Ionicons.add_circle_outline,
+                      Icons.add_circle_outline,
                       color: Colors.blue,
                     ),
                     title: Text('添加设备'),
@@ -516,7 +516,7 @@ class _FunctionDrinkPageState extends State<FunctionDrinkPage> {
                             child: Center(
                               child: Column(
                                 children: [
-                                  Icon(Icons.water_drop_outline, size: 48),
+                                  Icon(Icons.water_drop_outlined, size: 48),
                                   SizedBox(height: 10),
                                   Text('暂无收藏设备，请先添加设备'),
                                 ],
@@ -562,7 +562,7 @@ class _FunctionDrinkPageState extends State<FunctionDrinkPage> {
                                   ),
                                   trailing: IconButton(
                                     icon: Icon(
-                                      Ionicons.remove_circle_outline,
+                                      Icons.remove_circle_outline,
                                       color: Colors.red,
                                     ),
                                     onPressed: () {
@@ -711,7 +711,7 @@ class _FunctionDrinkPageState extends State<FunctionDrinkPage> {
                             Navigator.pop(context);
                             await _scanQRCodeAndAddDevice(context);
                           },
-                          icon: Icon(Ionicons.scan_outline, size: 24),
+                          icon: Icon(Icons.qr_code_scanner, size: 24),
                           label: Text(
                             '扫描设备二维码',
                             style: TextStyle(fontSize: 16),
@@ -908,8 +908,8 @@ class _QRCodeScannerPageState extends State<QRCodeScannerPage> {
                       },
                       icon: Icon(
                         _isFlashOn
-                            ? Icons.flash_onlight
-                            : Icons.flash_onlight_outline,
+                            ? Icons.flashlight_on
+                            : Icons.flashlight_off,
                         color: Colors.white,
                         size: 24,
                       ),
@@ -1105,4 +1105,5 @@ class Bubble {
 
   double get horizontalOffset => horizontalAnimation.value;
 }
+
 
