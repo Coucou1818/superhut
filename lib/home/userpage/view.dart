@@ -157,8 +157,8 @@ class _UserPageState extends State<UserPage> {
                       child: _buildStatCard(
                         title: "已修学分",
                         value: d['yxzxf'],
-                        color: Color(0xFFE3F1EC),
-                        textColor: Colors.black87,
+                        color: Theme.of(context).colorScheme.primaryContainer,
+                        textColor: Theme.of(context).colorScheme.onPrimaryContainer,
                         onTap: () async {
                           await renewToken(context);
                           Navigator.push(
@@ -178,8 +178,8 @@ class _UserPageState extends State<UserPage> {
                       child: _buildStatCard(
                         title: "我的绩点",
                         value: d['pjxfjd'],
-                        color: Color(0xFFFFF6E0),
-                        textColor: Colors.black87,
+                        color: Theme.of(context).colorScheme.secondaryContainer,
+                        textColor: Theme.of(context).colorScheme.onSecondaryContainer,
                         onTap: () async {
                           await renewToken(context);
                           Navigator.push(
@@ -199,7 +199,7 @@ class _UserPageState extends State<UserPage> {
                 // 校园卡
                 Card(
                   elevation: 0,
-                  color: Colors.purple.shade100,
+                  color: Theme.of(context).colorScheme.tertiaryContainer,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16),
                   ),
@@ -222,7 +222,7 @@ class _UserPageState extends State<UserPage> {
                                   '校园卡',
                                   style: TextStyle(
                                     fontWeight: FontWeight.w500,
-                                    color: Colors.black,
+                                    color: Theme.of(context).colorScheme.onTertiaryContainer,
                                   ),
                                 ),
                               ],
@@ -237,7 +237,7 @@ class _UserPageState extends State<UserPage> {
                               style: TextStyle(
                                 fontSize: 32,
                                 fontWeight: FontWeight.bold,
-                                color: Colors.black,
+                                color: Theme.of(context).colorScheme.onTertiaryContainer,
                               ),
                             ),
                             SizedBox(width: 5),
@@ -246,7 +246,7 @@ class _UserPageState extends State<UserPage> {
                               style: TextStyle(
                                 fontSize: 32,
                                 fontWeight: FontWeight.w100,
-                                color: Colors.black.withAlpha(150),
+                                color: Theme.of(context).colorScheme.onTertiaryContainer.withAlpha(150),
                               ),
                             ),
                           ],
@@ -257,10 +257,10 @@ class _UserPageState extends State<UserPage> {
                           },
                           style: ButtonStyle(
                             backgroundColor: WidgetStateProperty.all(
-                              Colors.purple.shade200,
+                              Theme.of(context).colorScheme.tertiary,
                             ),
                             foregroundColor: WidgetStateProperty.all(
-                              Colors.white,
+                              Theme.of(context).colorScheme.onTertiary,
                             ),
                             shape: WidgetStateProperty.all(
                               RoundedRectangleBorder(
@@ -367,7 +367,7 @@ class _UserPageState extends State<UserPage> {
               ),
               Container(
                 decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.5),
+                  color: textColor.withAlpha(20),
                   shape: BoxShape.circle,
                 ),
                 padding: EdgeInsets.all(4),
