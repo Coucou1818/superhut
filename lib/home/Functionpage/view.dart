@@ -123,7 +123,8 @@ class _FunctionPageState extends State<FunctionPage> {
               title: "空教室查询",
               rating: null,
               iconData: Ionicons.school,
-              color: Colors.blue.shade100,
+              color: Theme.of(context).colorScheme.primaryContainer,
+              iconColor: Theme.of(context).colorScheme.onPrimaryContainer,
               hasArrow: true,
               onTap: () async {
                 _setLoading("empty_room", true);
@@ -146,7 +147,8 @@ class _FunctionPageState extends State<FunctionPage> {
               title: "成绩查询",
               rating: null,
               iconData: Ionicons.document,
-              color: Colors.green.shade100,
+              color: Theme.of(context).colorScheme.secondaryContainer,
+              iconColor: Theme.of(context).colorScheme.onSecondaryContainer,
               hasArrow: true,
               onTap: () async {
                 _setLoading("score", true);
@@ -170,7 +172,8 @@ class _FunctionPageState extends State<FunctionPage> {
               title: "宿舍喝水",
               rating: null,
               iconData: Ionicons.water,
-              color: Colors.pink.shade100,
+              color: Theme.of(context).colorScheme.tertiaryContainer,
+              iconColor: Theme.of(context).colorScheme.onTertiaryContainer,
               hasArrow: true,
               onTap: () async {
                 Navigator.push(
@@ -185,7 +188,8 @@ class _FunctionPageState extends State<FunctionPage> {
               title: "洗澡",
               rating: null,
               iconData: Ionicons.sparkles,
-              color: Colors.deepPurpleAccent.shade100,
+              color: Theme.of(context).colorScheme.errorContainer,
+              iconColor: Theme.of(context).colorScheme.onErrorContainer,
               hasArrow: true,
               onTap: () async {
                 Navigator.push(
@@ -202,7 +206,8 @@ class _FunctionPageState extends State<FunctionPage> {
               title: "考试安排",
               rating: null,
               iconData: Ionicons.checkmark,
-              color: Colors.blueGrey.shade100,
+              color: Theme.of(context).colorScheme.primaryContainer,
+              iconColor: Theme.of(context).colorScheme.onPrimaryContainer,
               hasArrow: true,
               onTap: () async {
                 _setLoading("exam", true);
@@ -223,7 +228,8 @@ class _FunctionPageState extends State<FunctionPage> {
               title: "电费充值",
               rating: null,
               iconData: Ionicons.flash,
-              color: Colors.lime.shade100,
+              color: Theme.of(context).colorScheme.secondaryContainer,
+              iconColor: Theme.of(context).colorScheme.onSecondaryContainer,
               hasArrow: true,
               onTap: () async {
                 Navigator.push(
@@ -238,7 +244,8 @@ class _FunctionPageState extends State<FunctionPage> {
               title: "学生评教",
               rating: null,
               iconData: Ionicons.checkbox_outline,
-              color: Colors.pinkAccent.shade100,
+              color: Theme.of(context).colorScheme.tertiaryContainer,
+              iconColor: Theme.of(context).colorScheme.onTertiaryContainer,
               hasArrow: true,
               onTap: () async {
                 _setLoading("commentary", true);
@@ -259,7 +266,8 @@ class _FunctionPageState extends State<FunctionPage> {
               title: "智慧工大",
               rating: null,
               iconData: Ionicons.phone_portrait,
-              color: Colors.orange.shade100,
+              color: Theme.of(context).colorScheme.errorContainer,
+              iconColor: Theme.of(context).colorScheme.onErrorContainer,
               hasArrow: true,
               onTap: () async {
                 await renewToken(context);
@@ -282,26 +290,19 @@ class _FunctionPageState extends State<FunctionPage> {
     required String title,
     required IconData iconData,
     required Color color,
+    required Color iconColor,
     double? rating,
     bool hasArrow = false,
     required VoidCallback onTap,
   }) {
     final isLoading = _isLoading(id);
 
-    return GestureDetector(
-      onTap: isLoading ? null : onTap, // 如果正在加载则禁用点击
-      child: Container(
-        decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.surfaceContainer,
-          borderRadius: BorderRadius.circular(16),
-          //boxShadow: [
-          //  BoxShadow(
-          //    color: Colors.black.withOpacity(0.05),
-          //    blurRadius: 10,
-          //    offset: Offset(0, 4),
-          //   ),
-          // ],
-        ),
+    return Card(
+      elevation: 0,
+      color: Theme.of(context).colorScheme.surfaceContainer,
+      clipBehavior: Clip.antiAlias,
+      child: InkWell(
+        onTap: isLoading ? null : onTap,
         child: Column(
           children: [
             // 活动内容部分
@@ -316,7 +317,7 @@ class _FunctionPageState extends State<FunctionPage> {
                       borderRadius: BorderRadius.circular(12),
                     ),
                     padding: EdgeInsets.all(12),
-                    child: Icon(iconData, size: 28, color: Colors.white),
+                    child: Icon(iconData, size: 28, color: iconColor),
                   ),
 
                   SizedBox(width: 16),
