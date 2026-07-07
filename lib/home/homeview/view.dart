@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:google_nav_bar/google_nav_bar.dart';
+
 import 'package:ionicons/ionicons.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -30,6 +30,7 @@ class _HomeviewPageState extends State<HomeviewPage>
   bool _isForcedUpdate = false;
   String _downloadUrl = '';
   String _currentVersion = '0.0.1'; // 默认版本号
+  int _selectedIndex = 0; // 默认选中"课表"页
 
   @override
   void initState() {
@@ -163,33 +164,42 @@ class _HomeviewPageState extends State<HomeviewPage>
       body: PageView(
         physics: NeverScrollableScrollPhysics(),
         controller: logic.homePageController,
+        onPageChanged: (index) {
+          setState(() {
+            _selectedIndex = index;
+          });
+        },
         children: [CourseTableView(), FunctionPage(), UserPage()],
       ),
-      bottomSheet: Container(
-        color: Colors.transparent,
-        margin: EdgeInsets.all(10),
-        padding: EdgeInsets.only(left: 15, right: 15, bottom: 20, top: 10),
-        child: GNav(
-          gap: 10,
-          color: Theme.of(context).primaryColorDark,
-          activeColor: Theme.of(context).primaryColor,
-          iconSize: 24,
-          tabBackgroundColor: Theme.of(context).primaryColor.withAlpha(20),
-          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 14),
-          duration: Duration(milliseconds: 200),
-          tabs: [
-            GButton(icon: Ionicons.calendar_outline, text: '课表'),
-            GButton(icon: Ionicons.apps_outline, text: '功能'),
-            GButton(icon: Ionicons.person_outline, text: '我'),
-          ],
-          onTabChange: (index) {
-            logic.homePageController.animateToPage(
-              index,
-              duration: Duration(milliseconds: 200),
-              curve: Curves.easeInOut,
-            );
-          },
-        ),
+      bottomNavigationBar: NavigationBar(
+        selectedIndex: _selectedIndex,
+        onDestinationSelected: (int index) {
+          setState(() {
+            _selectedIndex = index;
+          });
+          logic.homePageController.animateToPage(
+            index,
+            duration: const Duration(milliseconds: 200),
+            curve: Curves.easeInOut,
+          );
+        },
+        destinations: const [
+          NavigationDestination(
+            icon: Icon(Ionicons.calendar_outline),
+            selectedIcon: Icon(Ionicons.calendar),
+            label: '课表',
+          ),
+          NavigationDestination(
+            icon: Icon(Ionicons.apps_outline),
+            selectedIcon: Icon(Ionicons.apps),
+            label: '功能',
+          ),
+          NavigationDestination(
+            icon: Icon(Ionicons.person_outline),
+            selectedIcon: Icon(Ionicons.person),
+            label: '我',
+          ),
+        ],
       ),
     );
   }
