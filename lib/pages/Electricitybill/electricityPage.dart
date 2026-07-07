@@ -1,7 +1,6 @@
-import 'package:enhanced_future_builder/enhanced_future_builder.dart';
+﻿import 'package:enhanced_future_builder/enhanced_future_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:ionicons/ionicons.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -377,7 +376,7 @@ class _ElectricityPageState extends State<ElectricityPage> {
               ),
               child: ListTile(
                 leading: Icon(
-                  Ionicons.grid_outline,
+                  Icons.grid_view,
                   color: Theme.of(context).primaryColor,
                 ),
                 title: Text(
@@ -404,7 +403,7 @@ class _ElectricityPageState extends State<ElectricityPage> {
               ),
             ),
             _buildFunctionItem(
-              icon: Ionicons.alert_circle_outline,
+              icon: Icons.error_outline,
               title: "电费预警",
               onTap: () async {
                 _showAlertBottomSheet(context);
@@ -504,7 +503,7 @@ class _ElectricityPageState extends State<ElectricityPage> {
                             final room = filteredRooms[index];
                             return ListTile(
                               leading: Icon(
-                                Ionicons.shapes_outline,
+                                Icons.category_outlined,
                                 color: Colors.blue,
                               ),
                               title: Text(room['acname']),
@@ -601,7 +600,7 @@ class _ElectricityPageState extends State<ElectricityPage> {
                               vertical: 12,
                             ),
                             prefixIcon: Icon(
-                              Ionicons.alert_circle_outline,
+                              Icons.error_outline,
                               color: Colors.orange,
                             ),
                           ),
@@ -777,3 +776,4 @@ class DecimalTextInputFormatter extends TextInputFormatter {
     return newString == newValue.text ? newValue : oldValue;
   }
 }
+

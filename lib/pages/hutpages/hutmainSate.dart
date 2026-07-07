@@ -1,4 +1,4 @@
-import 'package:get/get.dart';
+﻿import 'package:get/get.dart';
 
 class HutMainState {
   //是否加载
@@ -24,3 +24,4 @@ class HutMainState {
 
   HutMainState();
 }
+

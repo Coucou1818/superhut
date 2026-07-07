@@ -1,6 +1,5 @@
-import 'package:enhanced_future_builder/enhanced_future_builder.dart';
+﻿import 'package:enhanced_future_builder/enhanced_future_builder.dart';
 import 'package:flutter/material.dart';
-import 'package:ionicons/ionicons.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:superhut/welcomepage/view.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -109,7 +108,7 @@ class _UserPageState extends State<UserPage> {
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(8),
                           ),
-                          child: Icon(Ionicons.person_outline, size: 20), // 修改图标为用户相关图标
+                          child: Icon(Icons.person_outline, size: 20), // 修改图标为用户相关图标
                         ),
                         SizedBox(width: 10),
                         Text(
@@ -279,7 +278,7 @@ class _UserPageState extends State<UserPage> {
 
                 // 功能项
                 _buildFunctionItem(
-                  icon: Ionicons.refresh_outline,
+                  icon: Icons.refresh,
                   title: "刷新课表",
                   onTap: () async {
                     await renewToken(context);
@@ -293,7 +292,7 @@ class _UserPageState extends State<UserPage> {
                 ),
 
                 _buildFunctionItem(
-                  icon: Ionicons.log_out_outline,
+                  icon: Icons.logout,
                   title: "退出登录",
                   onTap: () async {
                     final prefs = await SharedPreferences.getInstance();
@@ -311,7 +310,7 @@ class _UserPageState extends State<UserPage> {
                 ),
 
                 _buildFunctionItem(
-                  icon: Ionicons.information_circle_outline,
+                  icon: Icons.info_outline,
                   title: "关于软件",
                   onTap: () {
                     Navigator.of(context).push(
@@ -404,3 +403,4 @@ class _UserPageState extends State<UserPage> {
     );
   }
 }
+

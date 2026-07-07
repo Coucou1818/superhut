@@ -1,4 +1,4 @@
-import 'package:get/get.dart';
+﻿import 'package:get/get.dart';
 /*
  * 课程数据模型类
  * @param name 课程名称
@@ -7,3 +7,4 @@ import 'package:get/get.dart';
  */
 
 class CourseTableViewLogic extends GetxController {}
+

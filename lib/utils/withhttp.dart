@@ -1,4 +1,4 @@
-import 'package:dio/dio.dart';
+﻿import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 final dio = Dio(); // With default `Options`.
@@ -78,4 +78,5 @@ Future<Response> postDioWithCookie(String path, Map postData, {String? customCoo
   print(response.data);
   return response;
 }
+
 

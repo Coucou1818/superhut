@@ -1,8 +1,7 @@
-import 'package:enhanced_future_builder/enhanced_future_builder.dart';
+﻿import 'package:enhanced_future_builder/enhanced_future_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:ionicons/ionicons.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -297,14 +296,14 @@ class _CourseTableViewState extends State<CourseTableView> {
                                       SizedBox(height: 10),
                                       ListTile(
                                         leading: Icon(
-                                          Ionicons.calendar_outline,
+                                          Icons.calendar_today,
                                           color: Theme.of(context).primaryColor,
                                         ),
                                         title: Text(course.weekDuration),
                                       ),
                                       ListTile(
                                         leading: Icon(
-                                          Ionicons.time_outline,
+                                          Icons.access_time,
                                           color: Theme.of(context).primaryColor,
                                         ),
                                         title: Text(
@@ -313,14 +312,14 @@ class _CourseTableViewState extends State<CourseTableView> {
                                       ),
                                       ListTile(
                                         leading: Icon(
-                                          Ionicons.person_outline,
+                                          Icons.person_outline,
                                           color: Theme.of(context).primaryColor,
                                         ),
                                         title: Text(course.teacherName),
                                       ),
                                       ListTile(
                                         leading: Icon(
-                                          Ionicons.location_outline,
+                                          Icons.location_on_outlined,
                                           color: Theme.of(context).primaryColor,
                                         ),
                                         title: Text(course.location),
@@ -329,7 +328,7 @@ class _CourseTableViewState extends State<CourseTableView> {
                                           course.pcid.isNotEmpty)
                                         ListTile(
                                           leading: Icon(
-                                            Ionicons.people_outline,
+                                            Icons.people_outline,
                                             color:
                                                 Theme.of(context).primaryColor,
                                           ),
@@ -442,14 +441,14 @@ class _CourseTableViewState extends State<CourseTableView> {
                             SizedBox(height: 10),
                             ListTile(
                               leading: Icon(
-                                Ionicons.calendar_outline,
+                                Icons.calendar_today,
                                 color: Theme.of(context).primaryColor,
                               ),
                               title: Text(course.weekDuration),
                             ),
                             ListTile(
                               leading: Icon(
-                                Ionicons.time_outline,
+                                Icons.access_time,
                                 color: Theme.of(context).primaryColor,
                               ),
                               title: Text(
@@ -458,14 +457,14 @@ class _CourseTableViewState extends State<CourseTableView> {
                             ),
                             ListTile(
                               leading: Icon(
-                                Ionicons.person_outline,
+                                Icons.person_outline,
                                 color: Theme.of(context).primaryColor,
                               ),
                               title: Text(course.teacherName),
                             ),
                             ListTile(
                               leading: Icon(
-                                Ionicons.location_outline,
+                                Icons.location_on_outlined,
                                 color: Theme.of(context).primaryColor,
                               ),
                               title: Text(course.location),
@@ -473,7 +472,7 @@ class _CourseTableViewState extends State<CourseTableView> {
                             if (course.isExp)
                               ListTile(
                                 leading: Icon(
-                                  Ionicons.people_outline,
+                                  Icons.people_outline,
                                   color: Theme.of(context).primaryColor,
                                 ),
                                 title: Text('查看人员名单'),
@@ -820,7 +819,7 @@ class _CourseTableViewState extends State<CourseTableView> {
                         var it = stu[index];
                         return ListTile(
                           leading: Icon(
-                            Ionicons.person_outline,
+                            Icons.person_outline,
                             color: Theme.of(context).primaryColor,
                           ),
                           title: Text(it['xm']?.toString() ?? ''),
@@ -842,3 +841,4 @@ class _CourseTableViewState extends State<CourseTableView> {
     );
   }
 }
+

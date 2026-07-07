@@ -1,11 +1,11 @@
-import 'dart:async'; // 导入异步包，用于处理传感器数据流
+﻿import 'dart:async'; // 导入异步包，用于处理传感器数据流
 import 'dart:math' as math;
 
 import 'package:confetti/confetti.dart'; // 添加彩带库
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:ionicons/ionicons.dart'; // 导入服务包，用于震动
+// 导入服务包，用于震动
 import 'package:sensors_plus/sensors_plus.dart'; // 导入传感器包，用于重力感应
 
 class AboutPage extends StatefulWidget {
@@ -699,7 +699,7 @@ class _AboutPageState extends State<AboutPage> with TickerProviderStateMixin {
                       children: [
                         ListTile(
                           leading: Icon(
-                            Ionicons.person_outline,
+                            Icons.person_outline,
                             color: Theme.of(context).primaryColor,
                           ),
                           title: Text(
@@ -751,3 +751,4 @@ class _AboutPageState extends State<AboutPage> with TickerProviderStateMixin {
     );
   }
 }
+

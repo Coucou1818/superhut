@@ -1,4 +1,4 @@
-import 'dart:convert';
+﻿import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:encrypt/encrypt.dart' as encrypt;
@@ -79,3 +79,4 @@ void main() {
   final pwd = base64Encode(utf8.encode(encryptedPassword));
   print('加密并Base64 编码后的密码：  $pwd');
 }
+

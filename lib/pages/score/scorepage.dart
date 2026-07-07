@@ -1,6 +1,5 @@
-import 'package:enhanced_future_builder/enhanced_future_builder.dart';
+﻿import 'package:enhanced_future_builder/enhanced_future_builder.dart';
 import 'package:flutter/material.dart';
-import 'package:ionicons/ionicons.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:superhut/pages/score/logic.dart';
 
@@ -342,7 +341,7 @@ class _ScorePageState extends State<ScorePage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  Icon(Ionicons.help_circle_outline, size: 14),
+                  Icon(Icons.help_outline, size: 14),
                   Text("不同数据分别代表什么", style: TextStyle(fontSize: 12)),
                 ],
               ),
@@ -353,3 +352,4 @@ class _ScorePageState extends State<ScorePage> {
     );
   }
 }
+

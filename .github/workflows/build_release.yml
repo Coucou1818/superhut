@@ -1,4 +1,4 @@
-name: Build and Upload Release APK
+﻿name: Build and Upload Release APK
 
 on:
   push:
@@ -27,7 +27,7 @@ jobs:
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.19.0'
+          channel: 'stable'
 
       - name: Install dependencies
         run: flutter pub get
@@ -45,3 +45,4 @@ jobs:
           files: superhut-v1.2.1-m3-arm64-v8a.apk
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+

@@ -1,3 +1,4 @@
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +28,7 @@ abstract final class AppTheme {
       labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
       elevation: 0,
     ),
-    cardTheme: CardTheme(
+    cardTheme: CardThemeData(
       elevation: 0,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
@@ -52,7 +53,7 @@ abstract final class AppTheme {
       labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
       elevation: 0,
     ),
-    cardTheme: CardTheme(
+    cardTheme: CardThemeData(
       elevation: 0,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
@@ -206,3 +207,4 @@ class _MyAppState extends State<MyApp> {
     );
   }
 }
+

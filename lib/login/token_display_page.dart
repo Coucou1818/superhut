@@ -1,4 +1,4 @@
-// token_display_page.dart
+﻿// token_display_page.dart
 import 'package:flutter/material.dart';
 
 import '../bridge/getCoursePage.dart';
@@ -58,3 +58,4 @@ class _TokenDisplayPageState extends State<TokenDisplayPage> {
     );
   }
 }
+

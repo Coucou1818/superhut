@@ -1,9 +1,8 @@
-import 'package:dio/dio.dart';
+﻿import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-import 'package:ionicons/ionicons.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:superhut/home/Functionpage/view.dart';
@@ -185,18 +184,18 @@ class _HomeviewPageState extends State<HomeviewPage>
         },
         destinations: const [
           NavigationDestination(
-            icon: Icon(Ionicons.calendar_outline),
-            selectedIcon: Icon(Ionicons.calendar),
+            icon: Icon(Icons.calendar_today),
+            selectedIcon: Icon(Icons.calendar_month),
             label: '课表',
           ),
           NavigationDestination(
-            icon: Icon(Ionicons.apps_outline),
-            selectedIcon: Icon(Ionicons.apps),
+            icon: Icon(Icons.apps),
+            selectedIcon: Icon(Icons.apps),
             label: '功能',
           ),
           NavigationDestination(
-            icon: Icon(Ionicons.person_outline),
-            selectedIcon: Icon(Ionicons.person),
+            icon: Icon(Icons.person_outline),
+            selectedIcon: Icon(Icons.person),
             label: '我',
           ),
         ],
@@ -207,3 +206,4 @@ class _HomeviewPageState extends State<HomeviewPage>
   @override
   bool get wantKeepAlive => true;
 }
+

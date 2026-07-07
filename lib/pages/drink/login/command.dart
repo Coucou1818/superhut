@@ -1,4 +1,4 @@
-import 'dart:math';
+﻿import 'dart:math';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
@@ -91,3 +91,4 @@ class DrinkLoginCommand {
     _reset();
   }
 }
+

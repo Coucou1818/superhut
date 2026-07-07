@@ -1,0 +1,272 @@
+﻿2026-07-07T15:58:09.9577429Z Current runner version: '2.335.1'
+2026-07-07T15:58:09.9605078Z ##[group]Runner Image Provisioner
+2026-07-07T15:58:09.9606054Z Hosted Compute Agent
+2026-07-07T15:58:09.9606710Z Version: 20260624.560
+2026-07-07T15:58:09.9607397Z Commit: 925d229a51159bc391ae97e54a2dd1fe20af789d
+2026-07-07T15:58:09.9608174Z Build Date: 2026-06-24T18:26:47Z
+2026-07-07T15:58:09.9608885Z Worker ID: {a906c098-82a3-4a14-93b4-9af82011e7af}
+2026-07-07T15:58:09.9609972Z Azure Region: northcentralus
+2026-07-07T15:58:09.9610615Z ##[endgroup]
+2026-07-07T15:58:09.9612094Z ##[group]Operating System
+2026-07-07T15:58:09.9612859Z Ubuntu
+2026-07-07T15:58:09.9613413Z 24.04.4
+2026-07-07T15:58:09.9613979Z LTS
+2026-07-07T15:58:09.9614533Z ##[endgroup]
+2026-07-07T15:58:09.9615134Z ##[group]Runner Image
+2026-07-07T15:58:09.9615852Z Image: ubuntu-24.04
+2026-07-07T15:58:09.9616457Z Version: 20260628.225.1
+2026-07-07T15:58:09.9617807Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260628.225/images/ubuntu/Ubuntu2404-Readme.md
+2026-07-07T15:58:09.9619400Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260628.225
+2026-07-07T15:58:09.9620977Z ##[endgroup]
+2026-07-07T15:58:09.9622178Z ##[group]GITHUB_TOKEN Permissions
+2026-07-07T15:58:09.9624472Z Contents: write
+2026-07-07T15:58:09.9625169Z Metadata: read
+2026-07-07T15:58:09.9625725Z ##[endgroup]
+2026-07-07T15:58:09.9628048Z Secret source: Actions
+2026-07-07T15:58:09.9629196Z Prepare workflow directory
+2026-07-07T15:58:10.0031316Z Prepare all required actions
+2026-07-07T15:58:10.0085967Z Getting action download info
+2026-07-07T15:58:10.3061513Z Download action repository 'actions/checkout@v4' (SHA:34e114876b0b11c390a56381ad16ebd13914f8d5)
+2026-07-07T15:58:10.3908341Z Download action repository 'actions/setup-java@v3' (SHA:17f84c3641ba7b8f6deff6309fc4c864478f5d62)
+2026-07-07T15:58:10.8577420Z Download action repository 'subosito/flutter-action@v2' (SHA:1a449444c387b1966244ae4d4f8c696479add0b2)
+2026-07-07T15:58:11.0522734Z Download action repository 'softprops/action-gh-release@v1' (SHA:de2c0eb89ae2a093876385947365aca7b0e5f844)
+2026-07-07T15:58:11.5137420Z Getting action download info
+2026-07-07T15:58:11.7344331Z Download action repository 'actions/cache@v5' (SHA:caa296126883cff596d87d8935842f9db880ef25)
+2026-07-07T15:58:12.2939784Z Complete job name: build
+2026-07-07T15:58:12.3805738Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-07-07T15:58:12.3816981Z ##[group]Run actions/checkout@v4
+2026-07-07T15:58:12.3818187Z with:
+2026-07-07T15:58:12.3819043Z   repository: Coucou1818/superhut
+2026-07-07T15:58:12.3827805Z   token: ***
+2026-07-07T15:58:12.3828646Z   ssh-strict: true
+2026-07-07T15:58:12.3829509Z   ssh-user: git
+2026-07-07T15:58:12.3830486Z   persist-credentials: true
+2026-07-07T15:58:12.3831490Z   clean: true
+2026-07-07T15:58:12.3832387Z   sparse-checkout-cone-mode: true
+2026-07-07T15:58:12.3833435Z   fetch-depth: 1
+2026-07-07T15:58:12.3834300Z   fetch-tags: false
+2026-07-07T15:58:12.3835196Z   show-progress: true
+2026-07-07T15:58:12.3836077Z   lfs: false
+2026-07-07T15:58:12.3836953Z   submodules: false
+2026-07-07T15:58:12.3837840Z   set-safe-directory: true
+2026-07-07T15:58:12.3839100Z ##[endgroup]
+2026-07-07T15:58:12.5034921Z Syncing repository: Coucou1818/superhut
+2026-07-07T15:58:12.5038824Z ##[group]Getting Git version info
+2026-07-07T15:58:12.5041059Z Working directory is '/home/runner/work/superhut/superhut'
+2026-07-07T15:58:12.5044105Z [command]/usr/bin/git version
+2026-07-07T15:58:12.5045568Z git version 2.54.0
+2026-07-07T15:58:12.5050236Z ##[endgroup]
+2026-07-07T15:58:12.5058986Z Temporarily overriding HOME='/home/runner/work/_temp/ce34d5cf-c66b-4922-9af8-802df2be7911' before making global git config changes
+2026-07-07T15:58:12.5063348Z Adding repository directory to the temporary git global config as a safe directory
+2026-07-07T15:58:12.5067123Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/superhut/superhut
+2026-07-07T15:58:12.5072112Z Deleting the contents of '/home/runner/work/superhut/superhut'
+2026-07-07T15:58:12.5075349Z ##[group]Initializing the repository
+2026-07-07T15:58:12.5077327Z [command]/usr/bin/git init /home/runner/work/superhut/superhut
+2026-07-07T15:58:12.5162028Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-07-07T15:58:12.5165533Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-07-07T15:58:12.5168671Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-07-07T15:58:12.5171341Z hint: call:
+2026-07-07T15:58:12.5172905Z hint:
+2026-07-07T15:58:12.5174504Z hint: 	git config --global init.defaultBranch <name>
+2026-07-07T15:58:12.5176350Z hint:
+2026-07-07T15:58:12.5178365Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-07-07T15:58:12.5181625Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-07-07T15:58:12.5184206Z hint:
+2026-07-07T15:58:12.5185741Z hint: 	git branch -m <name>
+2026-07-07T15:58:12.5187357Z hint:
+2026-07-07T15:58:12.5189462Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-07-07T15:58:12.5193211Z Initialized empty Git repository in /home/runner/work/superhut/superhut/.git/
+2026-07-07T15:58:12.5198952Z [command]/usr/bin/git remote add origin https://github.com/Coucou1818/superhut
+2026-07-07T15:58:12.5216724Z ##[endgroup]
+2026-07-07T15:58:12.5218898Z ##[group]Disabling automatic garbage collection
+2026-07-07T15:58:12.5221080Z [command]/usr/bin/git config --local gc.auto 0
+2026-07-07T15:58:12.5255902Z ##[endgroup]
+2026-07-07T15:58:12.5258114Z ##[group]Setting up auth
+2026-07-07T15:58:12.5261419Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-07-07T15:58:12.5298190Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-07-07T15:58:12.5637288Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-07-07T15:58:12.5688534Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-07-07T15:58:12.5941222Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-07-07T15:58:12.5982283Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-07-07T15:58:12.6229352Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-07-07T15:58:12.6271415Z ##[endgroup]
+2026-07-07T15:58:12.6273686Z ##[group]Fetching the repository
+2026-07-07T15:58:12.6283944Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +538f3d544e1ed29b3095e6eaec8b92f4da8ee3c7:refs/remotes/origin/master
+2026-07-07T15:58:13.2030849Z From https://github.com/Coucou1818/superhut
+2026-07-07T15:58:13.2033218Z  * [new ref]         538f3d544e1ed29b3095e6eaec8b92f4da8ee3c7 -> origin/master
+2026-07-07T15:58:13.2068328Z ##[endgroup]
+2026-07-07T15:58:13.2070691Z ##[group]Determining the checkout info
+2026-07-07T15:58:13.2073255Z ##[endgroup]
+2026-07-07T15:58:13.2077718Z [command]/usr/bin/git sparse-checkout disable
+2026-07-07T15:58:13.2131817Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-07-07T15:58:13.2166847Z ##[group]Checking out the ref
+2026-07-07T15:58:13.2171630Z [command]/usr/bin/git checkout --progress --force -B master refs/remotes/origin/master
+2026-07-07T15:58:13.2481254Z Reset branch 'master'
+2026-07-07T15:58:13.2483096Z branch 'master' set up to track 'origin/master'.
+2026-07-07T15:58:13.2493507Z ##[endgroup]
+2026-07-07T15:58:13.2545913Z [command]/usr/bin/git log -1 --format=%H
+2026-07-07T15:58:13.2576473Z 538f3d544e1ed29b3095e6eaec8b92f4da8ee3c7
+2026-07-07T15:58:13.2946115Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-07-07T15:58:13.2950935Z ##[group]Run actions/setup-java@v3
+2026-07-07T15:58:13.2951910Z with:
+2026-07-07T15:58:13.2952694Z   distribution: zulu
+2026-07-07T15:58:13.2953557Z   java-version: 17
+2026-07-07T15:58:13.2954393Z   java-package: jdk
+2026-07-07T15:58:13.2955238Z   check-latest: false
+2026-07-07T15:58:13.2956101Z   server-id: github
+2026-07-07T15:58:13.2956972Z   server-username: GITHUB_ACTOR
+2026-07-07T15:58:13.2957958Z   server-password: GITHUB_TOKEN
+2026-07-07T15:58:13.2958960Z   overwrite-settings: true
+2026-07-07T15:58:13.2959990Z   job-status: success
+2026-07-07T15:58:13.2968072Z   token: ***
+2026-07-07T15:58:13.2968856Z ##[endgroup]
+2026-07-07T15:58:13.4700724Z ##[group]Installed distributions
+2026-07-07T15:58:13.4728815Z Trying to resolve the latest version from remote
+2026-07-07T15:58:13.4864653Z (node:2287) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-07-07T15:58:13.4868433Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-07-07T15:58:13.5489021Z Resolved latest version as 17.0.19+10
+2026-07-07T15:58:13.5506449Z Trying to download...
+2026-07-07T15:58:13.5521389Z Downloading Java 17.0.19+10 (Zulu) from https://cdn.azul.com/zulu/bin/zulu17.66.19-ca-crac-jdk17.0.19-linux_x64.tar.gz ...
+2026-07-07T15:58:17.1155328Z Extracting Java archive...
+2026-07-07T15:58:17.1286777Z [command]/usr/bin/tar xz --warning=no-unknown-keyword -C /home/runner/work/_temp/6cb903df-abae-4dfc-a902-2cf3cfe534d5 -f /home/runner/work/_temp/9e8e82ec-b5f6-4f35-9499-b74d57e30ac1
+2026-07-07T15:58:20.0432013Z Java 17.0.19+10 was downloaded
+2026-07-07T15:58:20.0440597Z Setting Java 17.0.19+10 as the default
+2026-07-07T15:58:20.0460695Z Creating toolchains.xml for JDK version 17 from zulu
+2026-07-07T15:58:20.0523463Z Writing to /home/runner/.m2/toolchains.xml
+2026-07-07T15:58:20.0524140Z 
+2026-07-07T15:58:20.0524334Z Java configuration:
+2026-07-07T15:58:20.0524695Z   Distribution: zulu
+2026-07-07T15:58:20.0525167Z   Version: 17.0.19+10
+2026-07-07T15:58:20.0525799Z   Path: /opt/hostedtoolcache/Java_Zulu_jdk/17.0.19-10/x64
+2026-07-07T15:58:20.0526206Z 
+2026-07-07T15:58:20.0527222Z ##[endgroup]
+2026-07-07T15:58:20.0544090Z Creating settings.xml with server-id: github
+2026-07-07T15:58:20.0550376Z Writing to /home/runner/.m2/settings.xml
+2026-07-07T15:58:20.0885916Z ##[group]Run subosito/flutter-action@v2
+2026-07-07T15:58:20.0886231Z with:
+2026-07-07T15:58:20.0886440Z   flutter-version: 3.19.0
+2026-07-07T15:58:20.0886700Z   channel: stable
+2026-07-07T15:58:20.0886927Z   architecture: X64
+2026-07-07T15:58:20.0887137Z   cache: false
+2026-07-07T15:58:20.0887352Z   pub-cache-path: default
+2026-07-07T15:58:20.0887586Z   dry-run: false
+2026-07-07T15:58:20.0887864Z   git-source: https://github.com/flutter/flutter.git
+2026-07-07T15:58:20.0888181Z env:
+2026-07-07T15:58:20.0888460Z   JAVA_HOME: /opt/hostedtoolcache/Java_Zulu_jdk/17.0.19-10/x64
+2026-07-07T15:58:20.0888869Z   JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Zulu_jdk/17.0.19-10/x64
+2026-07-07T15:58:20.0889214Z ##[endgroup]
+2026-07-07T15:58:20.0987017Z ##[group]Run chmod +x "$GITHUB_ACTION_PATH/setup.sh"
+2026-07-07T15:58:20.0987473Z [36;1mchmod +x "$GITHUB_ACTION_PATH/setup.sh"[0m
+2026-07-07T15:58:20.3486011Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-07-07T15:58:20.3486522Z env:
+2026-07-07T15:58:20.3486882Z   JAVA_HOME: /opt/hostedtoolcache/Java_Zulu_jdk/17.0.19-10/x64
+2026-07-07T15:58:20.3487319Z   JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Zulu_jdk/17.0.19-10/x64
+2026-07-07T15:58:20.3487938Z ##[endgroup]
+2026-07-07T15:58:20.3636582Z ##[group]Run $GITHUB_ACTION_PATH/setup.sh -p \
+2026-07-07T15:58:20.3636998Z [36;1m$GITHUB_ACTION_PATH/setup.sh -p \[0m
+2026-07-07T15:58:20.3637299Z [36;1m  -n '3.19.0' \[0m
+2026-07-07T15:58:20.3637536Z [36;1m  -f '' \[0m
+2026-07-07T15:58:20.3637745Z [36;1m  -a 'X64' \[0m
+2026-07-07T15:58:20.3637960Z [36;1m  -k '' \[0m
+2026-07-07T15:58:20.3638148Z [36;1m  -c '' \[0m
+2026-07-07T15:58:20.3638347Z [36;1m  -l '' \[0m
+2026-07-07T15:58:20.3638550Z [36;1m  -d 'default' \[0m
+2026-07-07T15:58:20.3638891Z [36;1m  -g 'https://github.com/flutter/flutter.git' \[0m
+2026-07-07T15:58:20.3639220Z [36;1m  stable[0m
+2026-07-07T15:58:20.3671996Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-07-07T15:58:20.3672351Z env:
+2026-07-07T15:58:20.3672643Z   JAVA_HOME: /opt/hostedtoolcache/Java_Zulu_jdk/17.0.19-10/x64
+2026-07-07T15:58:20.3673075Z   JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Zulu_jdk/17.0.19-10/x64
+2026-07-07T15:58:20.3673426Z ##[endgroup]
+2026-07-07T15:58:20.5443882Z ##[group]Run $GITHUB_ACTION_PATH/setup.sh \
+2026-07-07T15:58:20.5444256Z [36;1m$GITHUB_ACTION_PATH/setup.sh \[0m
+2026-07-07T15:58:20.5444535Z [36;1m  -n '3.19.0' \[0m
+2026-07-07T15:58:20.5444769Z [36;1m  -a 'x64' \[0m
+2026-07-07T15:58:20.5445077Z [36;1m  -c '/opt/hostedtoolcache/flutter/stable-3.19.0-x64' \[0m
+2026-07-07T15:58:20.5445439Z [36;1m  -d '/home/runner/.pub-cache' \[0m
+2026-07-07T15:58:20.5445705Z [36;1m  stable[0m
+2026-07-07T15:58:20.5480179Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-07-07T15:58:20.5480521Z env:
+2026-07-07T15:58:20.5480800Z   JAVA_HOME: /opt/hostedtoolcache/Java_Zulu_jdk/17.0.19-10/x64
+2026-07-07T15:58:20.5481214Z   JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Zulu_jdk/17.0.19-10/x64
+2026-07-07T15:58:20.5481571Z ##[endgroup]
+2026-07-07T15:58:20.7077894Z   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+2026-07-07T15:58:20.7079399Z                                  Dload  Upload   Total   Spent    Left  Speed
+2026-07-07T15:58:20.7080472Z 
+2026-07-07T15:58:21.6005091Z   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+2026-07-07T15:58:22.6004230Z  13  632M   13 82.9M    0     0  92.9M      0  0:00:06 --:--:--  0:00:06 92.9M
+2026-07-07T15:58:23.6007896Z  33  632M   33  211M    0     0   111M      0  0:00:05  0:00:01  0:00:04  111M
+2026-07-07T15:58:24.6298707Z  52  632M   52  332M    0     0   115M      0  0:00:05  0:00:02  0:00:03  115M
+2026-07-07T15:58:25.6015638Z  72  632M   72  458M    0     0   116M      0  0:00:05  0:00:03  0:00:02  116M
+2026-07-07T15:58:26.2694230Z  88  632M   88  562M    0     0   114M      0  0:00:05  0:00:04  0:00:01  114M
+2026-07-07T15:58:26.2695415Z 100  632M  100  632M    0     0   113M      0  0:00:05  0:00:05 --:--:--  117M
+2026-07-07T15:58:54.1032687Z ##[group]Run flutter pub get
+2026-07-07T15:58:54.1032997Z [36;1mflutter pub get[0m
+2026-07-07T15:58:54.1069512Z shell: /usr/bin/bash -e {0}
+2026-07-07T15:58:54.1069891Z env:
+2026-07-07T15:58:54.1070174Z   JAVA_HOME: /opt/hostedtoolcache/Java_Zulu_jdk/17.0.19-10/x64
+2026-07-07T15:58:54.1070599Z   JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Zulu_jdk/17.0.19-10/x64
+2026-07-07T15:58:54.1071042Z   FLUTTER_ROOT: /opt/hostedtoolcache/flutter/stable-3.19.0-x64/flutter
+2026-07-07T15:58:54.1071406Z   PUB_CACHE: /home/runner/.pub-cache
+2026-07-07T15:58:54.1071667Z ##[endgroup]
+2026-07-07T15:58:54.4202937Z 
+2026-07-07T15:58:54.4216401Z   ╔════════════════════════════════════════════════════════════════════════════╗
+2026-07-07T15:58:54.4217845Z   ║                 Welcome to Flutter! - https://flutter.dev                  ║
+2026-07-07T15:58:54.4218872Z   ║                                                                            ║
+2026-07-07T15:58:54.4220329Z   ║ The Flutter tool uses Google Analytics to anonymously report feature usage ║
+2026-07-07T15:58:54.4221407Z   ║ statistics and basic crash reports. This data is used to help improve      ║
+2026-07-07T15:58:54.4222836Z   ║ Flutter tools over time.                                                   ║
+2026-07-07T15:58:54.4224151Z   ║                                                                            ║
+2026-07-07T15:58:54.4225067Z   ║ Flutter tool analytics are not sent on the very first run. To disable      ║
+2026-07-07T15:58:54.4226021Z   ║ reporting, type 'flutter config --no-analytics'. To display the current    ║
+2026-07-07T15:58:54.4226951Z   ║ setting, type 'flutter config'. If you opt out of analytics, an opt-out    ║
+2026-07-07T15:58:54.4227892Z   ║ event will be sent, and then no further information will be sent by the    ║
+2026-07-07T15:58:54.4228729Z   ║ Flutter tool.                                                              ║
+2026-07-07T15:58:54.4229412Z   ║                                                                            ║
+2026-07-07T15:58:54.4230408Z   ║ By downloading the Flutter SDK, you agree to the Google Terms of Service.  ║
+2026-07-07T15:58:54.4231341Z   ║ The Google Privacy Policy describes how data is handled in this service.   ║
+2026-07-07T15:58:54.4232155Z   ║                                                                            ║
+2026-07-07T15:58:54.4232926Z   ║ Moreover, Flutter includes the Dart SDK, which may send usage metrics and  ║
+2026-07-07T15:58:54.4233794Z   ║ crash reports to Google.                                                   ║
+2026-07-07T15:58:54.4234537Z   ║                                                                            ║
+2026-07-07T15:58:54.4235277Z   ║ Read about data we send with crash reports:                                ║
+2026-07-07T15:58:54.4236193Z   ║ https://flutter.dev/docs/reference/crash-reporting                         ║
+2026-07-07T15:58:54.4236994Z   ║                                                                            ║
+2026-07-07T15:58:54.4237752Z   ║ See Google's privacy policy:                                               ║
+2026-07-07T15:58:54.4238618Z   ║ https://policies.google.com/privacy                                        ║
+2026-07-07T15:58:54.4239418Z   ║                                                                            ║
+2026-07-07T15:58:54.4240437Z   ║ To disable animations in this tool, use                                    ║
+2026-07-07T15:58:54.4241295Z   ║ 'flutter config --no-cli-animations'.                                      ║
+2026-07-07T15:58:54.4242221Z   ╚════════════════════════════════════════════════════════════════════════════╝
+2026-07-07T15:58:54.4242666Z 
+2026-07-07T15:58:59.9844217Z Resolving dependencies...
+2026-07-07T15:59:02.6820479Z The current Dart SDK version is 3.3.0.
+2026-07-07T15:59:02.6820754Z 
+2026-07-07T15:59:02.6820958Z Because superhut requires SDK version ^3.7.0, version solving failed.
+2026-07-07T15:59:02.6821257Z 
+2026-07-07T15:59:02.6821262Z 
+2026-07-07T15:59:02.6822052Z You can try the following suggestion to make the pubspec resolve:
+2026-07-07T15:59:02.6822443Z * Try using the Flutter SDK version: 3.44.5. 
+2026-07-07T15:59:02.7533638Z ##[error]Process completed with exit code 1.
+2026-07-07T15:59:02.7713702Z Post job cleanup.
+2026-07-07T15:59:02.7774288Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-07-07T15:59:02.7775421Z Post job cleanup.
+2026-07-07T15:59:02.9183290Z (node:2595) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-07-07T15:59:02.9184479Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-07-07T15:59:02.9391423Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-07-07T15:59:02.9393626Z Post job cleanup.
+2026-07-07T15:59:03.0308554Z [command]/usr/bin/git version
+2026-07-07T15:59:03.0352144Z git version 2.54.0
+2026-07-07T15:59:03.0422810Z Temporarily overriding HOME='/home/runner/work/_temp/d64fb07e-5070-4856-8388-40fa8143b06c' before making global git config changes
+2026-07-07T15:59:03.0424553Z Adding repository directory to the temporary git global config as a safe directory
+2026-07-07T15:59:03.0428567Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/superhut/superhut
+2026-07-07T15:59:03.0472996Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-07-07T15:59:03.0515606Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-07-07T15:59:03.0842051Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-07-07T15:59:03.0898028Z http.https://github.com/.extraheader
+2026-07-07T15:59:03.0912188Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-07-07T15:59:03.0961788Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-07-07T15:59:03.1315260Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-07-07T15:59:03.1366595Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-07-07T15:59:03.1914808Z Cleaning up orphan processes
+2026-07-07T15:59:03.2223356Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-java@v3. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

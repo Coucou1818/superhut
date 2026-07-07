@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 
 import '../../utils/hut_user_api.dart';
 
@@ -21,3 +21,4 @@ void loginToHuT(String username, String password, context) {
     }
   });
 }
+

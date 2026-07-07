@@ -1,4 +1,4 @@
-import '../../utils/roomapi.dart';
+﻿import '../../utils/roomapi.dart';
 
 bool isGet = false, isRoomGet = false;
 List<Building> buildingList = [];
@@ -27,3 +27,4 @@ Future<List<Room>> getRoom(
   roomList = await api.getFreeRoomList(date, nodeId, buildingId);
   return roomList;
 }
+

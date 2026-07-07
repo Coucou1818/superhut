@@ -1,4 +1,4 @@
-import 'package:flutter/services.dart';
+﻿import 'package:flutter/services.dart';
 
 /// 小组件刷新服务类
 /// 用于刷新桌面小组件
@@ -20,3 +20,4 @@ class WidgetRefreshService {
     }
   }
 }
+

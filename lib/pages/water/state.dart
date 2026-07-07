@@ -1,4 +1,4 @@
-import 'package:get/get.dart';
+﻿import 'package:get/get.dart';
 
 class FunctionHotWaterState {
   // 设备列表
@@ -21,3 +21,4 @@ class FunctionHotWaterState {
 
   FunctionHotWaterState();
 }
+

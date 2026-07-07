@@ -1,6 +1,5 @@
-import 'package:enhanced_future_builder/enhanced_future_builder.dart';
+﻿import 'package:enhanced_future_builder/enhanced_future_builder.dart';
 import 'package:flutter/material.dart';
-import 'package:ionicons/ionicons.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:superhut/pages/Commentary/CommentaryApi.dart';
 import 'package:superhut/pages/Commentary/CommentaryPage2.dart';
@@ -66,7 +65,7 @@ class _commentaryPage1State extends State<commentaryPage1> {
                                 Row(
                                   children: [
                                     Icon(
-                                      Ionicons.location,
+                                      Icons.location_on,
                                       size: 20,
                                       color: Theme.of(
                                         context,
@@ -90,7 +89,7 @@ class _commentaryPage1State extends State<commentaryPage1> {
                                 Row(
                                   children: [
                                     Icon(
-                                      Ionicons.calendar,
+                                      Icons.calendar_month,
                                       size: 20,
                                       color: Theme.of(
                                         context,
@@ -153,3 +152,4 @@ class _commentaryPage1State extends State<commentaryPage1> {
     );
   }
 }
+

@@ -1,4 +1,4 @@
-import 'package:enhanced_future_builder/enhanced_future_builder.dart';
+﻿import 'package:enhanced_future_builder/enhanced_future_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
@@ -121,3 +121,4 @@ class _Type1WebviewState extends State<Type1Webview> {
     );
   }
 }
+

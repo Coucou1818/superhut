@@ -1,4 +1,4 @@
-import 'package:dio/dio.dart';
+﻿import 'package:dio/dio.dart';
 import 'package:superhut/utils/token.dart';
 import 'package:superhut/utils/withhttp.dart';
 
@@ -129,3 +129,4 @@ class FreeRoomApi {
     return roomList;
   }
 }
+

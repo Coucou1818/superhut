@@ -1,9 +1,8 @@
-import 'dart:async';
+﻿import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ionicons/ionicons.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -560,7 +559,7 @@ class _FunctionHotWaterPageState extends State<FunctionHotWaterPage> {
                               trailing:
                                   logic.state.choiceDevice.value == index
                                       ? Icon(
-                                        Ionicons.checkmark_circle,
+                                        Icons.check_circle,
                                         color: Colors.orange,
                                       )
                                       : null,
@@ -1081,3 +1080,4 @@ class _BubbleState extends State<Bubble> with SingleTickerProviderStateMixin {
     );
   }
 }
+

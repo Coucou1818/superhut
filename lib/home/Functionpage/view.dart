@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:ionicons/ionicons.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:superhut/pages/Commentary/CommentaryPage1.dart';
 import 'package:superhut/pages/Electricitybill/electricityPage.dart';
@@ -63,7 +62,7 @@ class _FunctionPageState extends State<FunctionPage> {
         ),
         actions: [
           IconButton(
-            icon: Icon(Ionicons.notifications_outline, size: 24),
+            icon: Icon(Icons.notifications_none, size: 24),
             onPressed: () {},
           ),
         ],
@@ -94,7 +93,7 @@ class _FunctionPageState extends State<FunctionPage> {
                 padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                 child: Row(
                   children: [
-                    Icon(Ionicons.book_outline, color: Colors.orange),
+                    Icon(Icons.book_outlined, color: Colors.orange),
                     SizedBox(width: 8),
                     Text("课程", style: TextStyle(fontWeight: FontWeight.w500)),
                   ],
@@ -110,7 +109,7 @@ class _FunctionPageState extends State<FunctionPage> {
                   shape: BoxShape.circle,
                 ),
                 padding: EdgeInsets.all(12),
-                child: Icon(Ionicons.search_outline),
+                child: Icon(Icons.search),
               ),
             ],
           ),
@@ -122,7 +121,7 @@ class _FunctionPageState extends State<FunctionPage> {
               id: "empty_room",
               title: "空教室查询",
               rating: null,
-              iconData: Ionicons.school,
+              iconData: Icons.school,
               color: Theme.of(context).colorScheme.primaryContainer,
               iconColor: Theme.of(context).colorScheme.onPrimaryContainer,
               hasArrow: true,
@@ -146,7 +145,7 @@ class _FunctionPageState extends State<FunctionPage> {
               id: "score",
               title: "成绩查询",
               rating: null,
-              iconData: Ionicons.document,
+              iconData: Icons.description,
               color: Theme.of(context).colorScheme.secondaryContainer,
               iconColor: Theme.of(context).colorScheme.onSecondaryContainer,
               hasArrow: true,
@@ -171,7 +170,7 @@ class _FunctionPageState extends State<FunctionPage> {
               id: "drink",
               title: "宿舍喝水",
               rating: null,
-              iconData: Ionicons.water,
+              iconData: Icons.water_drop,
               color: Theme.of(context).colorScheme.tertiaryContainer,
               iconColor: Theme.of(context).colorScheme.onTertiaryContainer,
               hasArrow: true,
@@ -187,7 +186,7 @@ class _FunctionPageState extends State<FunctionPage> {
               id: "hot_water",
               title: "洗澡",
               rating: null,
-              iconData: Ionicons.sparkles,
+              iconData: Icons.auto_awesome,
               color: Theme.of(context).colorScheme.errorContainer,
               iconColor: Theme.of(context).colorScheme.onErrorContainer,
               hasArrow: true,
@@ -205,7 +204,7 @@ class _FunctionPageState extends State<FunctionPage> {
               id: "exam",
               title: "考试安排",
               rating: null,
-              iconData: Ionicons.checkmark,
+              iconData: Icons.check,
               color: Theme.of(context).colorScheme.primaryContainer,
               iconColor: Theme.of(context).colorScheme.onPrimaryContainer,
               hasArrow: true,
@@ -227,7 +226,7 @@ class _FunctionPageState extends State<FunctionPage> {
               id: "electricity",
               title: "电费充值",
               rating: null,
-              iconData: Ionicons.flash,
+              iconData: Icons.flash_on,
               color: Theme.of(context).colorScheme.secondaryContainer,
               iconColor: Theme.of(context).colorScheme.onSecondaryContainer,
               hasArrow: true,
@@ -243,7 +242,7 @@ class _FunctionPageState extends State<FunctionPage> {
               id: "commentary",
               title: "学生评教",
               rating: null,
-              iconData: Ionicons.checkbox_outline,
+              iconData: Icons.check_box_outline_blank,
               color: Theme.of(context).colorScheme.tertiaryContainer,
               iconColor: Theme.of(context).colorScheme.onTertiaryContainer,
               hasArrow: true,
@@ -265,7 +264,7 @@ class _FunctionPageState extends State<FunctionPage> {
               id: "hut_main",
               title: "智慧工大",
               rating: null,
-              iconData: Ionicons.phone_portrait,
+              iconData: Icons.smartphone,
               color: Theme.of(context).colorScheme.errorContainer,
               iconColor: Theme.of(context).colorScheme.onErrorContainer,
               hasArrow: true,
@@ -338,7 +337,7 @@ class _FunctionPageState extends State<FunctionPage> {
                           Row(
                             children: [
                               Icon(
-                                Ionicons.star,
+                                Icons.star,
                                 color: Colors.amber,
                                 size: 16,
                               ),
@@ -367,7 +366,7 @@ class _FunctionPageState extends State<FunctionPage> {
                                 color: Theme.of(context).colorScheme.primary,
                                 size: 16,
                               )
-                              : Icon(Ionicons.arrow_forward, size: 16),
+                              : Icon(Icons.arrow_forward, size: 16),
                     )
                   else
                     _buildAvatarGroup(),
@@ -432,3 +431,4 @@ class _FunctionPageState extends State<FunctionPage> {
     );
   }
 }
+

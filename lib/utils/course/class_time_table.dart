@@ -1,4 +1,4 @@
-import 'package:superhut/utils/course/coursemain.dart';
+﻿import 'package:superhut/utils/course/coursemain.dart';
 
 /// Defines the real-world start and end times for each class section (1-10)
 class ClassTimeTable {
@@ -60,3 +60,4 @@ class ClassTimeTable {
     return {'start': startTime, 'end': endTime};
   }
 }
+

@@ -1,7 +1,6 @@
-import 'package:enhanced_future_builder/enhanced_future_builder.dart';
+﻿import 'package:enhanced_future_builder/enhanced_future_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:ionicons/ionicons.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:superhut/pages/freeroom/buildingBridge.dart';
@@ -350,7 +349,7 @@ class _FreeRoomPageState extends State<FreeRoomPage> {
                                                 ),
                                                 ListTile(
                                                   leading: Icon(
-                                                    Ionicons.location_outline,
+                                                    Icons.location_on_outlined,
                                                   ),
                                                   title: Text(
                                                     data[index].name,
@@ -358,7 +357,7 @@ class _FreeRoomPageState extends State<FreeRoomPage> {
                                                 ),
                                                 ListTile(
                                                   leading: Icon(
-                                                    Ionicons.happy_outline,
+                                                    Icons.sentiment_satisfied,
                                                   ),
                                                   title: Text(
                                                     '座位数：${data[index].seatNumber}',
@@ -439,3 +438,4 @@ class _FreeRoomPageState extends State<FreeRoomPage> {
     );
   }
 }
+

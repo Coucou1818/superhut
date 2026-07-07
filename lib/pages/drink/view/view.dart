@@ -1,9 +1,8 @@
-import 'dart:async';
+﻿import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ionicons/ionicons.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
@@ -296,7 +295,7 @@ class _FunctionDrinkPageState extends State<FunctionDrinkPage> {
                               trailing:
                                   logic.state.choiceDevice.value == index
                                       ? Icon(
-                                        Ionicons.checkmark_circle,
+                                        Icons.check_circle,
                                         color: Theme.of(context).primaryColor,
                                       )
                                       : null,
@@ -445,7 +444,7 @@ class _FunctionDrinkPageState extends State<FunctionDrinkPage> {
                     ),
                   ),
                   ListTile(
-                    leading: Icon(Ionicons.grid_outline, color: Colors.blue),
+                    leading: Icon(Icons.grid_view, color: Colors.blue),
                     title: Text('设备管理'),
                     onTap: () {
                       Navigator.pop(context);
@@ -517,7 +516,7 @@ class _FunctionDrinkPageState extends State<FunctionDrinkPage> {
                             child: Center(
                               child: Column(
                                 children: [
-                                  Icon(Ionicons.water_outline, size: 48),
+                                  Icon(Icons.water_drop_outline, size: 48),
                                   SizedBox(height: 10),
                                   Text('暂无收藏设备，请先添加设备'),
                                 ],
@@ -689,7 +688,7 @@ class _FunctionDrinkPageState extends State<FunctionDrinkPage> {
                           child: Row(
                             children: [
                               Icon(
-                                Ionicons.information_circle_outline,
+                                Icons.info_outline,
                                 color: Theme.of(context).colorScheme.primary,
                                 size: 24,
                               ),
@@ -883,7 +882,7 @@ class _QRCodeScannerPageState extends State<QRCodeScannerPage> {
                   child: Row(
                     children: [
                       Icon(
-                        Ionicons.information_circle_outline,
+                        Icons.info_outline,
                         color: Colors.blue,
                       ),
                       SizedBox(width: 10),
@@ -909,8 +908,8 @@ class _QRCodeScannerPageState extends State<QRCodeScannerPage> {
                       },
                       icon: Icon(
                         _isFlashOn
-                            ? Ionicons.flashlight
-                            : Ionicons.flashlight_outline,
+                            ? Icons.flash_onlight
+                            : Icons.flash_onlight_outline,
                         color: Colors.white,
                         size: 24,
                       ),
@@ -1106,3 +1105,4 @@ class Bubble {
 
   double get horizontalOffset => horizontalAnimation.value;
 }
+
