@@ -1,4 +1,4 @@
-
+﻿
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +24,20 @@ abstract final class AppTheme {
       seedColor: Colors.indigo,
       brightness: Brightness.light,
     ),
+        pageTransitionsTheme: const PageTransitionsTheme(
+      builders: {
+        TargetPlatform.android: ZoomPageTransitionsBuilder(allowEnterRouteSnapshotting: false),
+        TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+      },
+    ),
+    dialogTheme: DialogTheme(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(28)),
+    ),
+    bottomSheetTheme: const BottomSheetThemeData(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
+      ),
+    ),
     navigationBarTheme: NavigationBarThemeData(
       labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
       elevation: 0,
@@ -31,7 +45,7 @@ abstract final class AppTheme {
     cardTheme: CardThemeData(
       elevation: 0,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(24),
       ),
       clipBehavior: Clip.antiAlias,
     ),
@@ -49,6 +63,20 @@ abstract final class AppTheme {
       seedColor: Colors.indigo,
       brightness: Brightness.dark,
     ),
+        pageTransitionsTheme: const PageTransitionsTheme(
+      builders: {
+        TargetPlatform.android: ZoomPageTransitionsBuilder(allowEnterRouteSnapshotting: false),
+        TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+      },
+    ),
+    dialogTheme: DialogTheme(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(28)),
+    ),
+    bottomSheetTheme: const BottomSheetThemeData(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
+      ),
+    ),
     navigationBarTheme: NavigationBarThemeData(
       labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
       elevation: 0,
@@ -56,7 +84,7 @@ abstract final class AppTheme {
     cardTheme: CardThemeData(
       elevation: 0,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(24),
       ),
       clipBehavior: Clip.antiAlias,
     ),
@@ -98,6 +126,13 @@ Future<void> main() async {
     ),
   );
   runApp(const MyApp());
+}
+
+class BouncingScrollBehavior extends MaterialScrollBehavior {
+  @override
+  ScrollPhysics getScrollPhysics(BuildContext context) {
+    return const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics());
+  }
 }
 
 class MyApp extends StatefulWidget {
@@ -182,6 +217,7 @@ class _MyAppState extends State<MyApp> {
     }
 
     return GetMaterialApp(
+      scrollBehavior: BouncingScrollBehavior(),
       navigatorKey: navigatorKey,
       localizationsDelegates: [
         GlobalMaterialLocalizations.delegate,
@@ -207,4 +243,5 @@ class _MyAppState extends State<MyApp> {
     );
   }
 }
+
 
