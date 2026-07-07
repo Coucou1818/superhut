@@ -17,6 +17,15 @@
 
 SuperHUT 是专为湖南工业大学学生开发的第三方一站式服务应用。由于官方APP用户体验不佳，我们开发了这个功能更完善、界面更友好的替代方案。
 
+## 🌟 本 Fork 专属优化说明 (Material 3 重构版)
+
+本项目 (`Coucou1818/superhut`) 是基于原仓库的界面焕新版本，主要进行了以下核心体验优化：
+
+- 🎨 **纯正 Material 3 风格**：全面升级至原生 Material 3 (M3) 视觉规范，应用色彩与组件呈现更现代的质感。
+- 📱 **Edge-to-Edge 沉浸体验**：全局配置沉浸式状态栏与底部导航栏，去除突兀边界，让内容充分填满屏幕。
+- 🧭 **全新导航栏**：摒弃老旧的 `google_nav_bar`，替换为 Flutter 原生的 M3 `NavigationBar`，交互更加丝滑流畅。
+- ✨ **动态色彩卡片**：重构了“功能页”与“我的页面”的卡片组件，全面采用 `ColorScheme` 系统级颜色映射（如 PrimaryContainer, TertiaryContainer 等），让应用色彩体系和谐且极具层次感。
+
 ## ✨ 主要功能
 
 ### 🎓 学习服务
@@ -129,15 +138,15 @@ flutter build ios --release
 
 ## 🙏 致谢
 
-- 感谢所有为项目做出贡献的开发者
-- 感谢Flutter团队提供的优秀框架
+- 感谢原作者 [@cc2562](https://github.com/cc2562) 的开源精神与构建的优秀基础架构。
+- 感谢 **湖南工业大学校园系统工作团队** 为同学们提供如此便捷的第三方校园生活服务平台与工作支持。
+- 感谢 **Flutter** 团队打造的极其卓越且富有表现力的跨平台开发框架。
 
 ## 📞 联系我们
 
-- **项目主页**: [GitHub Repository](https://github.com/cc2562/superhut)
-- **问题反馈**: [Issues](https://github.com/cc2562/superhut/issues)
+- **项目主页**: [GitHub Repository](https://github.com/Coucou1818/superhut)
+- **问题反馈**: [Issues](https://github.com/Coucou1818/superhut/issues)
 - **邮箱**: syywqs@foxmail.com
-
 
 
 ---
