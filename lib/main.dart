@@ -30,7 +30,7 @@ abstract final class AppTheme {
         TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
       },
     ),
-    dialogTheme: DialogTheme(
+    dialogTheme: DialogThemeData(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(28)),
     ),
     bottomSheetTheme: const BottomSheetThemeData(
@@ -69,7 +69,7 @@ abstract final class AppTheme {
         TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
       },
     ),
-    dialogTheme: DialogTheme(
+    dialogTheme: DialogThemeData(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(28)),
     ),
     bottomSheetTheme: const BottomSheetThemeData(
@@ -243,5 +243,6 @@ class _MyAppState extends State<MyApp> {
     );
   }
 }
+
 
 
