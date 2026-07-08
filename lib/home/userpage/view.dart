@@ -9,6 +9,7 @@ import '../../pages/score/scorepage.dart';
 import '../../utils/hut_user_api.dart';
 import '../../utils/token.dart';
 import '../about/view.dart';
+import '../../widgets/bouncing_widget.dart';
 
 class UserPage extends StatefulWidget {
   const UserPage({super.key});
@@ -20,7 +21,6 @@ class UserPage extends StatefulWidget {
 class _UserPageState extends State<UserPage> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     getBalance();
   }
@@ -28,7 +28,6 @@ class _UserPageState extends State<UserPage> {
   final hutUserApi = HutUserApi();
   String balance = "--";
 
-  /// 获取余额
   Future<void> getBalance() async {
     await hutUserApi.getCardBalance().then((value) {
       balance = value.toString() ?? '--';
@@ -72,263 +71,198 @@ class _UserPageState extends State<UserPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.surface, // 浅灰蓝色背景，类似图片中的风格
-
+      backgroundColor: Theme.of(context).colorScheme.surface,
       body: EnhancedFutureBuilder(
         future: getBaseData(),
         rememberFutureResult: true,
         whenDone: (d) {
-          return SafeArea(
-            child: ListView(
-              padding: EdgeInsets.all(20),
-              children: [
-                // 顶部标题
-                Text(
-                  "你好，${d["name"]}",
-                  style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
+          return CustomScrollView(
+            physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+            slivers: [
+              SliverAppBar.large(
+                title: Text(
+                  "你好，${d['name']}",
+                  style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-
-                SizedBox(height: 24),
-                /*
-              Container(
-                padding: EdgeInsets.all(20),
-                decoration: BoxDecoration(
-                  color: Color(0xFFF1E6F5),
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // 标题行
+                backgroundColor: Theme.of(context).colorScheme.surface,
+                scrolledUnderElevation: 0,
+                pinned: true,
+              ),
+              SliverPadding(
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                sliver: SliverList(
+                  delegate: SliverChildListDelegate([
+                    // 学分与绩点卡片
                     Row(
                       children: [
-                        Container(
-                          padding: EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(8),
+                        Expanded(
+                          child: _buildStatCard(
+                            title: "已修学分",
+                            value: d['yxzxf'],
+                            color: Theme.of(context).colorScheme.primaryContainer,
+                            textColor: Theme.of(context).colorScheme.onPrimaryContainer,
+                            onTap: () async {
+                              await renewToken(context);
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ScorePage(),
+                                ),
+                              );
+                            },
                           ),
-                          child: Icon(Icons.person_outline, size: 20), // 修改图标为用户相关图标
                         ),
-                        SizedBox(width: 10),
-                        Text(
-                          "我的信息",
-                          style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.black87),
+                        const SizedBox(width: 16),
+                        Expanded(
+                          child: _buildStatCard(
+                            title: "我的绩点",
+                            value: d['pjxfjd'],
+                            color: Theme.of(context).colorScheme.secondaryContainer,
+                            textColor: Theme.of(context).colorScheme.onSecondaryContainer,
+                            onTap: () async {
+                              await renewToken(context);
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ScorePage(),
+                                ),
+                              );
+                            },
+                          ),
                         ),
                       ],
                     ),
+                    const SizedBox(height: 24),
 
-                    SizedBox(height: 16),
+                    // 校园卡
+                    BouncingWidget(
+                      child: Card.filled(
+                        elevation: 0,
+                        color: Theme.of(context).colorScheme.tertiaryContainer,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(24),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(24.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                '校园卡',
+                                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                  fontWeight: FontWeight.w600,
+                                  color: Theme.of(context).colorScheme.onTertiaryContainer,
+                                ),
+                              ),
+                              const SizedBox(height: 12),
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  Text(
+                                    balance,
+                                    style: Theme.of(context).textTheme.displaySmall?.copyWith(
+                                      fontWeight: FontWeight.bold,
+                                      color: Theme.of(context).colorScheme.onTertiaryContainer,
+                                    ),
+                                  ),
+                                  const SizedBox(width: 8),
+                                  Padding(
+                                    padding: const EdgeInsets.only(bottom: 6),
+                                    child: Text(
+                                      'CNY',
+                                      style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                                        color: Theme.of(context).colorScheme.onTertiaryContainer.withOpacity(0.7),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 20),
+                              SizedBox(
+                                width: double.infinity,
+                                child: FilledButton.tonal(
+                                  onPressed: () {
+                                    _launchUrl();
+                                  },
+                                  style: FilledButton.styleFrom(
+                                    padding: const EdgeInsets.symmetric(vertical: 16),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(16),
+                                    ),
+                                  ),
+                                  child: const Text('充值', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 32),
+                    
+                    Text(
+                      "功能与设置",
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                    ),
+                    const SizedBox(height: 16),
 
-                    // 学生信息字段
-                    Text(
-                      "姓名: 张三", // 示例数据，实际可动态绑定
-                      style: TextStyle(fontSize: 14),
+                    // 功能项
+                    _buildFunctionItem(
+                      icon: Icons.refresh_rounded,
+                      title: "刷新课表",
+                      onTap: () async {
+                        await renewToken(context);
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => Getcoursepage(renew: true),
+                          ),
+                        );
+                      },
                     ),
-                    SizedBox(height: 8),
-                    Text(
-                      "学号: 20230001", // 示例数据，实际可动态绑定
-                      style: TextStyle(fontSize: 14),
+                    _buildFunctionItem(
+                      icon: Icons.info_outline_rounded,
+                      title: "关于软件",
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(builder: (context) => AboutPage()),
+                        );
+                      },
                     ),
-                    SizedBox(height: 8),
-                    Text(
-                      "班级: 计算机科学与技术1班", // 示例数据，实际可动态绑定
-                      style: TextStyle(fontSize: 14),
+                    _buildFunctionItem(
+                      icon: Icons.logout_rounded,
+                      title: "退出登录",
+                      onTap: () async {
+                        final prefs = await SharedPreferences.getInstance();
+                        prefs.setString('user', "");
+                        prefs.setString('password', "");
+                        await prefs.setBool('isFirstOpen', true);
+                        WidgetsBinding.instance.addPostFrameCallback((_) {
+                          Navigator.of(context).pushReplacement(
+                            MaterialPageRoute(
+                              builder: (context) => WelcomepagePage(),
+                            ),
+                          );
+                        });
+                      },
+                      isDestructive: true,
                     ),
-
-                    SizedBox(height: 20),
-                  ],
+                    const SizedBox(height: 100),
+                  ]),
                 ),
               ),
-
-
-              SizedBox(height: 24),
-
-              */
-                // 完成和分数卡片
-                Row(
-                  children: [
-                    // 完成卡片
-                    Expanded(
-                      child: _buildStatCard(
-                        title: "已修学分",
-                        value: d['yxzxf'],
-                        color: Theme.of(context).colorScheme.primaryContainer,
-                        textColor: Theme.of(context).colorScheme.onPrimaryContainer,
-                        onTap: () async {
-                          await renewToken(context);
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => ScorePage(),
-                            ),
-                          );
-                        },
-                      ),
-                    ),
-
-                    SizedBox(width: 12),
-
-                    // 分数卡片
-                    Expanded(
-                      child: _buildStatCard(
-                        title: "我的绩点",
-                        value: d['pjxfjd'],
-                        color: Theme.of(context).colorScheme.secondaryContainer,
-                        textColor: Theme.of(context).colorScheme.onSecondaryContainer,
-                        onTap: () async {
-                          await renewToken(context);
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => ScorePage(),
-                            ),
-                          );
-                        },
-                      ),
-                    ),
-                  ],
-                ),
-
-                SizedBox(height: 10),
-
-                // 校园卡
-                Card(
-                  elevation: 0,
-                  color: Theme.of(context).colorScheme.tertiaryContainer,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  child: Container(
-                    width: double.infinity,
-                    padding: EdgeInsets.all(16),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(16),
-                      color: Colors.white.withAlpha(20),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              children: [
-                                Text(
-                                  '校园卡',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w500,
-                                    color: Theme.of(context).colorScheme.onTertiaryContainer,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 8),
-                        Row(
-                          children: [
-                            Text(
-                              balance,
-                              style: TextStyle(
-                                fontSize: 32,
-                                fontWeight: FontWeight.bold,
-                                color: Theme.of(context).colorScheme.onTertiaryContainer,
-                              ),
-                            ),
-                            SizedBox(width: 5),
-                            Text(
-                              'CNY',
-                              style: TextStyle(
-                                fontSize: 32,
-                                fontWeight: FontWeight.w100,
-                                color: Theme.of(context).colorScheme.onTertiaryContainer.withAlpha(150),
-                              ),
-                            ),
-                          ],
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            _launchUrl();
-                          },
-                          style: ButtonStyle(
-                            backgroundColor: WidgetStateProperty.all(
-                              Theme.of(context).colorScheme.tertiary,
-                            ),
-                            foregroundColor: WidgetStateProperty.all(
-                              Theme.of(context).colorScheme.onTertiary,
-                            ),
-                            shape: WidgetStateProperty.all(
-                              RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(16),
-                              ),
-                            ),
-                          ),
-                          child: Text('充值'),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                SizedBox(height: 20),
-                //SizedBox(height: 24),
-
-                // 功能项
-                _buildFunctionItem(
-                  icon: Icons.refresh,
-                  title: "刷新课表",
-                  onTap: () async {
-                    await renewToken(context);
-                    // print("跳转");
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => Getcoursepage(renew: true),
-                      ),
-                    );
-                  },
-                ),
-
-                _buildFunctionItem(
-                  icon: Icons.logout,
-                  title: "退出登录",
-                  onTap: () async {
-                    final prefs = await SharedPreferences.getInstance();
-                    prefs.setString('user', "");
-                    prefs.setString('password', "");
-                    await prefs.setBool('isFirstOpen', true);
-                    WidgetsBinding.instance.addPostFrameCallback((_) {
-                      Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(
-                          builder: (context) => WelcomepagePage(),
-                        ),
-                      );
-                    });
-                  },
-                ),
-
-                _buildFunctionItem(
-                  icon: Icons.info_outline,
-                  title: "关于软件",
-                  onTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => AboutPage()),
-                    );
-                  },
-                ),
-                SizedBox(height: 100),
-              ],
-            ),
+            ],
           );
         },
-        whenNotDone: Center(child: CircularProgressIndicator()),
+        whenNotDone: const Center(child: CircularProgressIndicator()),
       ),
     );
   }
 
-  // 构建统计卡片
   Widget _buildStatCard({
     required VoidCallback onTap,
     required String title,
@@ -336,71 +270,94 @@ class _UserPageState extends State<UserPage> {
     required Color color,
     required Color textColor,
   }) {
-    return Container(
-      padding: EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: color,
-        borderRadius: BorderRadius.circular(16),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            title,
-            style: TextStyle(
-              color: textColor.withOpacity(0.7),
-              fontWeight: FontWeight.w500,
+    return BouncingWidget(
+      onPressed: onTap,
+      child: Container(
+        padding: const EdgeInsets.all(20),
+        decoration: BoxDecoration(
+          color: color,
+          borderRadius: BorderRadius.circular(24),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              title,
+              style: TextStyle(
+                color: textColor.withOpacity(0.8),
+                fontWeight: FontWeight.w600,
+                fontSize: 14,
+              ),
             ),
-          ),
-          SizedBox(height: 8),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                value,
-                style: TextStyle(
-                  fontSize: 32,
-                  fontWeight: FontWeight.bold,
-                  color: textColor,
+            const SizedBox(height: 12),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  value,
+                  style: TextStyle(
+                    fontSize: 32,
+                    fontWeight: FontWeight.bold,
+                    color: textColor,
+                  ),
                 ),
-              ),
-              Container(
-                decoration: BoxDecoration(
-                  color: textColor.withAlpha(20),
-                  shape: BoxShape.circle,
+                Container(
+                  decoration: BoxDecoration(
+                    color: textColor.withOpacity(0.15),
+                    shape: BoxShape.circle,
+                  ),
+                  padding: const EdgeInsets.all(8),
+                  child: Icon(Icons.arrow_forward_rounded, size: 20, color: textColor),
                 ),
-                padding: EdgeInsets.all(4),
-                child: IconButton(
-                  onPressed: onTap,
-                  icon: Icon(Icons.arrow_forward, size: 16, color: textColor),
-                ),
-              ),
-            ],
-          ),
-        ],
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
 
-  // 构建功能项
   Widget _buildFunctionItem({
     required IconData icon,
     required String title,
     required VoidCallback onTap,
+    bool isDestructive = false,
   }) {
-    return Container(
-      margin: EdgeInsets.only(bottom: 12),
-      decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.surfaceContainer,
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: ListTile(
-        leading: Icon(icon, color: Theme.of(context).primaryColor),
-        title: Text(title, style: TextStyle(fontWeight: FontWeight.w500)),
-        trailing: Icon(Icons.chevron_right, color: Colors.grey),
-        onTap: onTap,
+    return BouncingWidget(
+      onPressed: onTap,
+      child: Container(
+        margin: const EdgeInsets.only(bottom: 12),
+        decoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.surfaceContainerHighest.withOpacity(0.4),
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: ListTile(
+          contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+          leading: Container(
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: isDestructive 
+                  ? Theme.of(context).colorScheme.errorContainer 
+                  : Theme.of(context).colorScheme.primaryContainer,
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Icon(
+              icon, 
+              color: isDestructive 
+                  ? Theme.of(context).colorScheme.onErrorContainer 
+                  : Theme.of(context).colorScheme.onPrimaryContainer,
+            ),
+          ),
+          title: Text(
+            title, 
+            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+              fontWeight: FontWeight.w600,
+              color: isDestructive ? Theme.of(context).colorScheme.error : null,
+            ),
+          ),
+          trailing: Icon(Icons.chevron_right_rounded, color: Theme.of(context).colorScheme.onSurfaceVariant),
+        ),
       ),
     );
   }
 }
-

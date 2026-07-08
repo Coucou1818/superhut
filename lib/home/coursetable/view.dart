@@ -1,4 +1,4 @@
-﻿import 'package:enhanced_future_builder/enhanced_future_builder.dart';
+import 'package:enhanced_future_builder/enhanced_future_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -604,7 +604,7 @@ class _CourseTableViewState extends State<CourseTableView> {
                             children: [
                               Text(
                                 DateFormat('yyyy/M/dd').format(_currentDate),
-                                style: const TextStyle(fontSize: 18),
+                                style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.bold),
                               ),
                               PopupMenuButton(
                                 onSelected: (re) {},
@@ -624,7 +624,7 @@ class _CourseTableViewState extends State<CourseTableView> {
                                 ),
                                 child: Text(
                                   showWeekStr,
-                                  style: const TextStyle(fontSize: 18),
+                                  style: Theme.of(context).textTheme.titleSmall?.copyWith(color: Theme.of(context).colorScheme.onSurfaceVariant),
                                 ),
                               ),
                             ],

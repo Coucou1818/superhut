@@ -11,6 +11,7 @@ import 'package:superhut/live_notification_manager.dart';
 
 import '../../pages/score/scorepage.dart';
 import '../../utils/token.dart';
+import '../../widgets/bouncing_widget.dart';
 
 class FunctionPage extends StatefulWidget {
   const FunctionPage({super.key});
@@ -20,10 +21,8 @@ class FunctionPage extends StatefulWidget {
 }
 
 class _FunctionPageState extends State<FunctionPage> {
-  // 用于跟踪正在加载的功能
   final Set<String> _loadingFunctions = <String>{};
 
-  // 设置加载状态
   void _setLoading(String functionId, bool isLoading) {
     setState(() {
       if (isLoading) {
@@ -34,7 +33,6 @@ class _FunctionPageState extends State<FunctionPage> {
     });
   }
 
-  // 检查是否正在加载
   bool _isLoading(String functionId) {
     return _loadingFunctions.contains(functionId);
   }
@@ -42,393 +40,260 @@ class _FunctionPageState extends State<FunctionPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.surface, // 浅灰蓝色背景，类似图片中的风格
-      /*appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        title: Row(
-          children: [
-            CircleAvatar(
-              radius: 18,
-              backgroundImage: AssetImage('assets/images/avatar.png'),
-              onBackgroundImageError: (e, s) => Icon(Icons.person),
+      backgroundColor: Theme.of(context).colorScheme.surface,
+      body: CustomScrollView(
+        physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+        slivers: [
+          SliverAppBar.large(
+            title: Text(
+              "功能与服务",
+              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
             ),
-            SizedBox(width: 10),
-            Text(
-              "你的名字",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+            backgroundColor: Theme.of(context).colorScheme.surface,
+            scrolledUnderElevation: 0,
+            pinned: true,
+          ),
+          SliverPadding(
+            padding: const EdgeInsets.all(16.0),
+            sliver: SliverList(
+              delegate: SliverChildListDelegate([
+                _buildActivityCard(
+                  id: "empty_room",
+                  title: "空教室查询",
+                  subtitle: "快速寻找自习室",
+                  iconData: Icons.school_rounded,
+                  color: Theme.of(context).colorScheme.primaryContainer,
+                  iconColor: Theme.of(context).colorScheme.onPrimaryContainer,
+                  hasArrow: true,
+                  onTap: () async {
+                    _setLoading("empty_room", true);
+                    try {
+                      await renewToken(context);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => BuildingPage()),
+                      );
+                    } finally {
+                      _setLoading("empty_room", false);
+                    }
+                  },
+                ),
+                const SizedBox(height: 16),
+                _buildActivityCard(
+                  id: "score",
+                  title: "成绩查询",
+                  subtitle: "查看历年期末成绩",
+                  iconData: Icons.description_rounded,
+                  color: Theme.of(context).colorScheme.secondaryContainer,
+                  iconColor: Theme.of(context).colorScheme.onSecondaryContainer,
+                  hasArrow: true,
+                  onTap: () async {
+                    _setLoading("score", true);
+                    try {
+                      await renewToken(context);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => ScorePage()),
+                      );
+                    } finally {
+                      _setLoading("score", false);
+                    }
+                  },
+                ),
+                const SizedBox(height: 16),
+                _buildActivityCard(
+                  id: "drink",
+                  title: "宿舍喝水",
+                  subtitle: "寝室饮水机扫码",
+                  iconData: Icons.water_drop_rounded,
+                  color: Theme.of(context).colorScheme.tertiaryContainer,
+                  iconColor: Theme.of(context).colorScheme.onTertiaryContainer,
+                  hasArrow: true,
+                  onTap: () async {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => FunctionDrinkPage()),
+                    );
+                  },
+                ),
+                const SizedBox(height: 16),
+                _buildActivityCard(
+                  id: "hot_water",
+                  title: "洗浴热水",
+                  subtitle: "宿舍淋浴扫码",
+                  iconData: Icons.shower_rounded,
+                  color: Theme.of(context).colorScheme.errorContainer,
+                  iconColor: Theme.of(context).colorScheme.onErrorContainer,
+                  hasArrow: true,
+                  onTap: () async {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => FunctionHotWaterPage()),
+                    );
+                  },
+                ),
+                const SizedBox(height: 16),
+                _buildActivityCard(
+                  id: "exam",
+                  title: "考试安排",
+                  subtitle: "查看考场及座位号",
+                  iconData: Icons.edit_document,
+                  color: Theme.of(context).colorScheme.primaryContainer,
+                  iconColor: Theme.of(context).colorScheme.onPrimaryContainer,
+                  hasArrow: true,
+                  onTap: () async {
+                    _setLoading("exam", true);
+                    try {
+                      await renewToken(context);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => ExamSchedulePage()),
+                      );
+                    } finally {
+                      _setLoading("exam", false);
+                    }
+                  },
+                ),
+                const SizedBox(height: 16),
+                _buildActivityCard(
+                  id: "electricity",
+                  title: "电费充值",
+                  subtitle: "宿舍剩余电量查询",
+                  iconData: Icons.flash_on_rounded,
+                  color: Theme.of(context).colorScheme.secondaryContainer,
+                  iconColor: Theme.of(context).colorScheme.onSecondaryContainer,
+                  hasArrow: true,
+                  onTap: () async {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => ElectricityPage()),
+                    );
+                  },
+                ),
+                const SizedBox(height: 16),
+                _buildActivityCard(
+                  id: "commentary",
+                  title: "学生评教",
+                  subtitle: "期末教学评价入口",
+                  iconData: Icons.thumbs_up_down_rounded,
+                  color: Theme.of(context).colorScheme.tertiaryContainer,
+                  iconColor: Theme.of(context).colorScheme.onTertiaryContainer,
+                  hasArrow: true,
+                  onTap: () async {
+                    _setLoading("commentary", true);
+                    try {
+                      await renewToken(context);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => commentaryPage1()),
+                      );
+                    } finally {
+                      _setLoading("commentary", false);
+                    }
+                  },
+                ),
+                const SizedBox(height: 16),
+                _buildActivityCard(
+                  id: "hut_main",
+                  title: "智慧工大",
+                  subtitle: "教务系统原生入口",
+                  iconData: Icons.explore_rounded,
+                  color: Theme.of(context).colorScheme.primaryContainer,
+                  iconColor: Theme.of(context).colorScheme.onPrimaryContainer,
+                  hasArrow: true,
+                  onTap: () async {
+                    await renewToken(context);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => HutMainPage()),
+                    );
+                  },
+                ),
+                const SizedBox(height: 120),
+              ]),
             ),
-          ],
-        ),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.notifications_none, size: 24),
-            onPressed: () {},
           ),
         ],
-      ),
-
-       */
-      body: SafeArea(
-        child: ListView(
-          padding: EdgeInsets.all(16),
-          children: [
-            // 标题
-            Text(
-              "功能",
-              style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
-            ),
-
-            SizedBox(height: 16),
-
-            // 搜索和筛选栏
-            /*Row(
-            children: [
-              // 课程标签
-              Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(24),
-                ),
-                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                child: Row(
-                  children: [
-                    Icon(Icons.book_outlined, color: Colors.orange),
-                    SizedBox(width: 8),
-                    Text("课程", style: TextStyle(fontWeight: FontWeight.w500)),
-                  ],
-                ),
-              ),
-
-              Spacer(),
-
-              // 搜索按钮
-              Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  shape: BoxShape.circle,
-                ),
-                padding: EdgeInsets.all(12),
-                child: Icon(Icons.search),
-              ),
-            ],
-          ),
-
-           */
-            SizedBox(height: 24),
-
-            _buildActivityCard(
-              id: "empty_room",
-              title: "空教室查询",
-              rating: null,
-              iconData: Icons.school,
-              color: Theme.of(context).colorScheme.primaryContainer,
-              iconColor: Theme.of(context).colorScheme.onPrimaryContainer,
-              hasArrow: true,
-              onTap: () async {
-                _setLoading("empty_room", true);
-                try {
-                  await renewToken(context);
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => BuildingPage()),
-                  );
-                } finally {
-                  _setLoading("empty_room", false);
-                }
-              },
-            ),
-            SizedBox(height: 16),
-
-            // UX/UI 设计卡片
-            _buildActivityCard(
-              id: "score",
-              title: "成绩查询",
-              rating: null,
-              iconData: Icons.description,
-              color: Theme.of(context).colorScheme.secondaryContainer,
-              iconColor: Theme.of(context).colorScheme.onSecondaryContainer,
-              hasArrow: true,
-              onTap: () async {
-                _setLoading("score", true);
-                try {
-                  await renewToken(context);
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => ScorePage()),
-                  );
-                } finally {
-                  _setLoading("score", false);
-                }
-              },
-            ),
-
-            SizedBox(height: 16),
-
-            // 数据分析卡片
-            _buildActivityCard(
-              id: "drink",
-              title: "宿舍喝水",
-              rating: null,
-              iconData: Icons.water_drop,
-              color: Theme.of(context).colorScheme.tertiaryContainer,
-              iconColor: Theme.of(context).colorScheme.onTertiaryContainer,
-              hasArrow: true,
-              onTap: () async {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => FunctionDrinkPage()),
-                );
-              },
-            ),
-            SizedBox(height: 16),
-            _buildActivityCard(
-              id: "hot_water",
-              title: "洗澡",
-              rating: null,
-              iconData: Icons.auto_awesome,
-              color: Theme.of(context).colorScheme.errorContainer,
-              iconColor: Theme.of(context).colorScheme.onErrorContainer,
-              hasArrow: true,
-              onTap: () async {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => FunctionHotWaterPage(),
-                  ),
-                );
-              },
-            ),
-            SizedBox(height: 16),
-            _buildActivityCard(
-              id: "exam",
-              title: "考试安排",
-              rating: null,
-              iconData: Icons.check,
-              color: Theme.of(context).colorScheme.primaryContainer,
-              iconColor: Theme.of(context).colorScheme.onPrimaryContainer,
-              hasArrow: true,
-              onTap: () async {
-                _setLoading("exam", true);
-                try {
-                  await renewToken(context);
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => ExamSchedulePage()),
-                  );
-                } finally {
-                  _setLoading("exam", false);
-                }
-              },
-            ),
-            SizedBox(height: 16),
-            _buildActivityCard(
-              id: "electricity",
-              title: "电费充值",
-              rating: null,
-              iconData: Icons.flash_on,
-              color: Theme.of(context).colorScheme.secondaryContainer,
-              iconColor: Theme.of(context).colorScheme.onSecondaryContainer,
-              hasArrow: true,
-              onTap: () async {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => ElectricityPage()),
-                );
-              },
-            ),
-            SizedBox(height: 16),
-            _buildActivityCard(
-              id: "commentary",
-              title: "学生评教",
-              rating: null,
-              iconData: Icons.check_box_outline_blank,
-              color: Theme.of(context).colorScheme.tertiaryContainer,
-              iconColor: Theme.of(context).colorScheme.onTertiaryContainer,
-              hasArrow: true,
-              onTap: () async {
-                _setLoading("commentary", true);
-                try {
-                  await renewToken(context);
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => commentaryPage1()),
-                  );
-                } finally {
-                  _setLoading("commentary", false);
-                }
-              },
-            ),
-            SizedBox(height: 16),
-            _buildActivityCard(
-              id: "hut_main",
-              title: "智慧工大",
-              rating: null,
-              iconData: Icons.smartphone,
-              color: Theme.of(context).colorScheme.errorContainer,
-              iconColor: Theme.of(context).colorScheme.onErrorContainer,
-              hasArrow: true,
-              onTap: () async {
-                await renewToken(context);
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => HutMainPage()),
-                );
-              },
-            ),
-            SizedBox(height: 100),
-          ],
-        ),
       ),
     );
   }
 
-  // 构建活动卡片
   Widget _buildActivityCard({
     required String id,
     required String title,
+    String? subtitle,
     required IconData iconData,
     required Color color,
     required Color iconColor,
-    double? rating,
     bool hasArrow = false,
     required VoidCallback onTap,
   }) {
     final isLoading = _isLoading(id);
 
-    return Card(
-      elevation: 0,
-      color: Theme.of(context).colorScheme.surfaceContainer,
-      clipBehavior: Clip.antiAlias,
-      child: InkWell(
-        onTap: isLoading ? null : onTap,
-        child: Column(
-          children: [
-            // 活动内容部分
-            Padding(
-              padding: EdgeInsets.all(16),
-              child: Row(
-                children: [
-                  // 图标
-                  Container(
-                    decoration: BoxDecoration(
-                      color: color,
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    padding: EdgeInsets.all(12),
-                    child: Icon(iconData, size: 28, color: iconColor),
-                  ),
-
-                  SizedBox(width: 16),
-
-                  // 标题和评分
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          title,
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        if (rating != null)
-                          Row(
-                            children: [
-                              Icon(
-                                Icons.star,
-                                color: Colors.amber,
-                                size: 16,
-                              ),
-                              SizedBox(width: 4),
-                              Text(
-                                rating.toString(),
-                                style: TextStyle(
-                                  // color: Colors.grey.shade700,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                            ],
-                          ),
-                      ],
-                    ),
-                  ),
-
-                  // 右侧箭头或加载动画或人员头像
-                  if (hasArrow)
-                    Container(
-                      decoration: BoxDecoration(shape: BoxShape.circle),
-                      padding: EdgeInsets.all(8),
-                      child:
-                          isLoading
-                              ? LoadingAnimationWidget.inkDrop(
-                                color: Theme.of(context).colorScheme.primary,
-                                size: 16,
-                              )
-                              : Icon(Icons.arrow_forward, size: 16),
-                    )
-                  else
-                    _buildAvatarGroup(),
-                ],
-              ),
-            ),
-
-            // 底部分隔线和+6显示
-            if (!hasArrow)
+    return BouncingWidget(
+      onPressed: isLoading ? null : onTap,
+      child: Card.filled(
+        elevation: 0,
+        color: Theme.of(context).colorScheme.surfaceContainer,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(24),
+        ),
+        clipBehavior: Clip.antiAlias,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
+          child: Row(
+            children: [
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                 decoration: BoxDecoration(
-                  border: Border(top: BorderSide(color: Colors.grey.shade200)),
+                  color: color,
+                  borderRadius: BorderRadius.circular(16),
                 ),
-                child: Row(
+                padding: const EdgeInsets.all(16),
+                child: Icon(iconData, size: 28, color: iconColor),
+              ),
+              const SizedBox(width: 20),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    _buildAvatarGroup(),
-                    SizedBox(width: 8),
                     Text(
-                      "+6",
-                      style: TextStyle(
-                        //color: Colors.grey.shade700,
-                        fontWeight: FontWeight.w500,
+                      title,
+                      style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
+                    if (subtitle != null) ...[
+                      const SizedBox(height: 4),
+                      Text(
+                        subtitle,
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          color: Theme.of(context).colorScheme.onSurfaceVariant,
+                        ),
+                      ),
+                    ]
                   ],
                 ),
               ),
-          ],
+              if (hasArrow)
+                Container(
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.surfaceContainerHighest.withOpacity(0.5),
+                    shape: BoxShape.circle,
+                  ),
+                  padding: const EdgeInsets.all(10),
+                  child: isLoading
+                      ? LoadingAnimationWidget.inkDrop(
+                          color: Theme.of(context).colorScheme.primary,
+                          size: 18,
+                        )
+                      : Icon(Icons.arrow_forward_rounded, size: 18, color: Theme.of(context).colorScheme.onSurfaceVariant),
+                )
+            ],
+          ),
         ),
       ),
     );
   }
-
-  // 构建头像组
-  Widget _buildAvatarGroup() {
-    return SizedBox(
-      width: 80,
-      height: 24,
-      child: Stack(
-        children: List.generate(3, (index) {
-          return Positioned(
-            left: index * 18.0,
-            child: Container(
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                border: Border.all(color: Colors.white, width: 1.5),
-              ),
-              child: CircleAvatar(
-                radius: 12,
-                backgroundColor:
-                    Colors.primaries[index % Colors.primaries.length],
-                child: Text(
-                  String.fromCharCode(65 + index),
-                  style: TextStyle(color: Colors.white, fontSize: 10),
-                ),
-              ),
-            ),
-          );
-        }),
-      ),
-    );
-  }
 }
-
